@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MedChain Manufacturer Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#13ecda",
+              "background-light": "#f6f8f8",
+              "background-dark": "#102220",
+            },
+            fontFamily: {
+              "display": ["Inter", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .glass-panel { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(8px); }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Header -->
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-slate-200 dark:border-slate-800 px-6 py-4 bg-white dark:bg-slate-900 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="size-8 bg-primary rounded-lg flex items-center justify-center text-background-dark">
+<span class="material-symbols-outlined font-bold">account_tree</span>
+</div>
+<div>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-tight">PharmaCorp Global</h2>
+<p class="text-xs text-slate-500 font-medium uppercase tracking-wider">Manufacturer Portal</p>
+</div>
+</div>
+<div class="flex flex-1 justify-end gap-4 items-center">
+<div class="hidden md:flex items-center gap-2 px-3 py-1.5 bg-slate-100 dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700">
+<span class="size-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-xs font-mono text-slate-600 dark:text-slate-400">Polygon: 0x123...abc</span>
+</div>
+<button class="flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-background-dark text-sm font-bold transition-all hover:opacity-90 active:scale-95 shadow-sm">
+<span class="material-symbols-outlined mr-2 text-lg">account_balance_wallet</span>
+                    Connected
+                </button>
+<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10 border-2 border-primary/20" data-alt="User avatar placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDpnCEaIJT4Uw45KcPTVK_8Rwn6VGzFqcmMET_JjFww8d6OgZ3Jw4CLjX-3_XtHUykiHzJrdXbuH90wKVpzueOgrw7el2tKaYGtsBIYY0uJkT_jzkViuHK6S0vvbuWONYn0Tk-WeeQGwuFcYTCb_sYVgYSuirB6fEMqCwVcxGNzNW7UlqBqiHWHhCDYik_jI7yJ_StjMJgFd6jima_DPO5bvQUk1lv92es5fqLoWkq3q-fgmJPZLfnEjj5fb93fowDRvzzsT_2Pbo7a")'></div>
+</div>
+</header>
+<main class="flex-1 max-w-7xl mx-auto w-full px-6 py-8 flex flex-col gap-8">
+<!-- Dashboard Stats & Title -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+<div>
+<h1 class="text-slate-900 dark:text-white text-3xl font-black leading-tight tracking-tight">Batch Management</h1>
+<p class="text-slate-500 text-base">Tokenize and monitor pharmaceutical assets on-chain.</p>
+</div>
+<div class="flex gap-4">
+<div class="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-3 min-w-[140px]">
+<div class="p-2 bg-primary/10 rounded-lg text-primary">
+<span class="material-symbols-outlined">inventory_2</span>
+</div>
+<div>
+<p class="text-xs text-slate-500 font-medium">Total Batches</p>
+<p class="text-lg font-bold">1,284</p>
+</div>
+</div>
+<div class="bg-white dark:bg-slate-900 p-3 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center gap-3 min-w-[140px]">
+<div class="p-2 bg-amber-500/10 rounded-lg text-amber-500">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div>
+<p class="text-xs text-slate-500 font-medium">Pending Sync</p>
+<p class="text-lg font-bold">3</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Creation Area -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Batch Form -->
+<div class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center">
+<h3 class="font-bold text-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">add_circle</span>
+                            Create New Medicine Batch
+                        </h3>
+<span class="text-[10px] font-bold px-2 py-0.5 bg-slate-100 dark:bg-slate-800 rounded uppercase tracking-widest text-slate-500">Form ID: B-092</span>
+</div>
+<div class="p-6 space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Medicine Name</span>
+<input class="rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary py-3" placeholder="e.g. Paracetamol 500mg" type="text"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Batch Identifier (SKU)</span>
+<input class="rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary py-3" placeholder="BCH-992-ALPHA" type="text"/>
+</label>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Manufacture Date</span>
+<input class="rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary py-3" type="date"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Expiry Date</span>
+<input class="rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary py-3" type="date"/>
+</label>
+<label class="flex flex-col gap-2">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Storage Conditions</span>
+<select class="rounded-lg border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:ring-primary focus:border-primary py-3">
+<option>Room Temp (20-25°C)</option>
+<option>Refrigerated (2-8°C)</option>
+<option>Frozen (-20°C)</option>
+<option>Ultra-Low (-80°C)</option>
+</select>
+</label>
+</div>
+<div class="flex flex-col gap-2">
+<span class="text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">Upload Lab Certificates (IPFS)</span>
+<div class="border-2 border-dashed border-slate-200 dark:border-slate-700 rounded-xl p-8 flex flex-col items-center justify-center bg-slate-50/50 dark:bg-slate-800/30 hover:bg-primary/5 transition-colors cursor-pointer group">
+<span class="material-symbols-outlined text-4xl text-slate-400 group-hover:text-primary mb-2">cloud_upload</span>
+<p class="text-sm font-medium text-slate-600 dark:text-slate-400">Drag files here or click to browse</p>
+<p class="text-[10px] text-slate-400 mt-1 uppercase">PDF, PNG, JPG (Max 10MB)</p>
+</div>
+</div>
+<div class="flex items-center justify-between pt-4 border-t border-slate-100 dark:border-slate-800">
+<div class="flex items-center gap-2 text-primary font-mono text-[10px] truncate max-w-[300px]">
+<span class="material-symbols-outlined text-sm">link</span>
+<span class="truncate">TX: 0x892ac...f21 (Pending Confirmation)</span>
+</div>
+<button class="bg-primary text-background-dark px-8 py-3 rounded-lg font-bold text-sm shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">verified</span>
+                                Register Batch on Ledger
+                            </button>
+</div>
+</div>
+</div>
+<!-- QR Preview Sidebar -->
+<div class="flex flex-col gap-6">
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 flex flex-col items-center text-center shadow-sm">
+<h3 class="text-sm font-bold text-slate-900 dark:text-white mb-6 uppercase tracking-widest">Digital Passport Preview</h3>
+<div class="p-4 bg-white rounded-xl border border-slate-200 mb-6 shadow-inner">
+<div class="size-48 bg-slate-50 flex items-center justify-center border border-slate-100 relative overflow-hidden" data-alt="Auto-generated QR code preview for medicine batch" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBV2LUduKkMN83ihayRvGfNi8RV5VMNriZEpjT9AwMMQpVarliUlTBYCPfLgaLxdLvn5R-m1-aGSUrgVHSSWj1hxPm02650A0TkrBDpT0c_DMalDISyjkcy8OJKPw_7vzb7phuiIch4OX_B1o6tl2IJBR4Nwim_cvzk3lZizY4c5RSjy80mmHww-2caKkoaITSDmzmDQ95m2e1A94ydlrKRFjuuB_m-8xo2HRJLv0xpEBNh1g6npaszo8240ixD1Jzeuw2L4kjU7Tl2'); background-size: cover;">
+<!-- Abstract QR representation -->
+</div>
+</div>
+<p class="text-xs font-bold text-slate-900 dark:text-white">BATCH-ID: BCH-992-ALPHA</p>
+<p class="text-[10px] text-slate-500 mt-1">Scan to verify provenance on Polygon Network</p>
+</div>
+<div class="bg-primary/10 rounded-xl p-4 border border-primary/20">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-primary">info</span>
+<div>
+<h4 class="text-xs font-bold text-slate-900 dark:text-white uppercase mb-1">On-Chain Privacy</h4>
+<p class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">Sensitive manufacturer data is hashed before being committed. Only authorized regulatory bodies can decrypt original PII.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Batch Registry Table -->
+<div class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-center bg-slate-50/50 dark:bg-slate-800/50">
+<h3 class="font-bold text-lg">Registered Batches</h3>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-slate-500 transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+<button class="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 rounded-lg text-slate-500 transition-colors">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="text-[11px] font-bold text-slate-400 uppercase tracking-widest bg-slate-50 dark:bg-slate-800/30">
+<th class="px-6 py-4">Batch ID</th>
+<th class="px-6 py-4">Medicine</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Expiry Date</th>
+<th class="px-6 py-4">Storage</th>
+<th class="px-6 py-4 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100 dark:divide-slate-800 text-sm">
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-mono text-xs text-primary underline decoration-primary/30 underline-offset-4 cursor-pointer">BCH-882-X</td>
+<td class="px-6 py-4 font-semibold">Amoxicillin 250mg</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Active</span>
+</td>
+<td class="px-6 py-4 text-slate-500">2025-12-15</td>
+<td class="px-6 py-4 text-slate-500">20-25°C</td>
+<td class="px-6 py-4 text-right">
+<button class="text-xs font-bold text-rose-500 hover:text-rose-600 transition-colors uppercase tracking-tighter">Mark Recalled</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-mono text-xs text-primary underline decoration-primary/30 underline-offset-4 cursor-pointer">BCH-771-Y</td>
+<td class="px-6 py-4 font-semibold">Insulin Glargine</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 uppercase tracking-wider">Expired</span>
+</td>
+<td class="px-6 py-4 text-slate-500">2023-10-01</td>
+<td class="px-6 py-4 text-slate-500">2-8°C</td>
+<td class="px-6 py-4 text-right">
+<button class="text-xs font-bold text-slate-400 cursor-not-allowed uppercase tracking-tighter" disabled="">Archived</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors bg-rose-50/20 dark:bg-rose-900/10">
+<td class="px-6 py-4 font-mono text-xs text-primary underline decoration-primary/30 underline-offset-4 cursor-pointer">BCH-104-Z</td>
+<td class="px-6 py-4 font-semibold">Lisinopril 10mg</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-rose-100 dark:bg-rose-900/30 text-rose-600 dark:text-rose-400 uppercase tracking-wider">Recalled</span>
+</td>
+<td class="px-6 py-4 text-slate-500">2026-05-20</td>
+<td class="px-6 py-4 text-slate-500">20-25°C</td>
+<td class="px-6 py-4 text-right">
+<button class="text-xs font-bold text-slate-500 uppercase tracking-tighter border border-slate-200 dark:border-slate-700 px-3 py-1 rounded">View Report</button>
+</td>
+</tr>
+<tr class="hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors">
+<td class="px-6 py-4 font-mono text-xs text-primary underline decoration-primary/30 underline-offset-4 cursor-pointer">BCH-552-K</td>
+<td class="px-6 py-4 font-semibold">Atorvastatin 40mg</td>
+<td class="px-6 py-4">
+<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Active</span>
+</td>
+<td class="px-6 py-4 text-slate-500">2025-08-11</td>
+<td class="px-6 py-4 text-slate-500">20-25°C</td>
+<td class="px-6 py-4 text-right">
+<button class="text-xs font-bold text-rose-500 hover:text-rose-600 transition-colors uppercase tracking-tighter">Mark Recalled</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="p-4 border-t border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/30 flex items-center justify-between">
+<p class="text-xs text-slate-500 font-medium tracking-tight">Showing 4 of 1,284 batches</p>
+<div class="flex gap-2">
+<button class="px-3 py-1 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-white transition-colors">Previous</button>
+<button class="px-3 py-1 rounded border border-slate-200 dark:border-slate-700 text-xs font-bold hover:bg-white transition-colors">Next</button>
+</div>
+</div>
+</div>
+</main>
+<footer class="mt-12 py-8 border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">security</span>
+<span class="text-sm font-bold text-slate-900 dark:text-white">MedChain Global Compliance Engine</span>
+</div>
+<div class="flex gap-6 text-xs font-medium text-slate-400">
+<a class="hover:text-primary transition-colors" href="#">Documentation</a>
+<a class="hover:text-primary transition-colors" href="#">Network Status</a>
+<a class="hover:text-primary transition-colors" href="#">API Keys</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+<p class="text-xs text-slate-500">© 2024 MedChain. Powered by Polygon POS.</p>
+</div>
+</footer>
+</div>
+</div>
+</body></html>

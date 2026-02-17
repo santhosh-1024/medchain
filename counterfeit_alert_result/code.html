@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecda",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102220",
+                        "alert-red": "#e11d48",
+                        "alert-red-light": "#fff1f2",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<title>MedChain | Counterfeit Alert</title>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-[#0d1b1a]">
+<div class="relative flex min-h-screen flex-col overflow-x-hidden">
+<!-- Header -->
+<header class="flex items-center justify-between border-b border-solid border-[#e7f3f2] bg-white px-6 md:px-20 py-4 sticky top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="text-primary">
+<span class="material-symbols-outlined text-3xl">shield_moon</span>
+</div>
+<h2 class="text-[#0d1b1a] text-xl font-extrabold leading-tight tracking-tight">MedChain</h2>
+</div>
+<nav class="hidden md:flex flex-1 justify-center gap-10">
+<a class="text-[#4c9a93] hover:text-primary text-sm font-semibold transition-colors" href="#">Scanner</a>
+<a class="text-[#4c9a93] hover:text-primary text-sm font-semibold transition-colors" href="#">History</a>
+<a class="text-[#4c9a93] hover:text-primary text-sm font-semibold transition-colors" href="#">Safety Alerts</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center rounded-lg h-10 w-10 bg-[#e7f3f2] text-[#0d1b1a] hover:bg-[#d0e8e6] transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="h-10 w-10 rounded-full bg-cover bg-center border-2 border-primary/20" data-alt="User profile avatar" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAVZChOaEdx8Zalh1regNdHmVASL7sRmRYx23O37wg2KhDDwNFbKhYapKsp3brlfSoWuJtmoUyKt6NFlbniaSLzRSh0afomTFXzT7rx9Y6YuHOlEvH6yKchljOckGpuI9tnEHup4hCCQbhdEJlaGwLWEj2aO2qbLLObLulc4J6n9iU6GWSuZDZJTeXH7duGoE5KlBHhcCp_VZXPk6SO5LVbgu_pQc6Wehp7I35rtnWBsrq5wGJ4oAgro_IpBXX6SnwLX1YO17AN8CSq");'></div>
+</div>
+</header>
+<main class="flex-1 max-w-[1024px] mx-auto w-full px-4 py-8">
+<!-- Main Alert Card -->
+<div class="rounded-xl border-4 border-alert-red bg-alert-red-light p-6 md:p-10 mb-8 shadow-xl shadow-alert-red/10">
+<div class="flex flex-col md:flex-row items-start md:items-center gap-6 mb-8">
+<div class="flex items-center justify-center bg-alert-red text-white p-4 rounded-full shadow-lg">
+<span class="material-symbols-outlined text-5xl">dangerous</span>
+</div>
+<div>
+<h1 class="text-3xl md:text-4xl font-black text-alert-red tracking-tight mb-2 uppercase">Counterfeit Alert Detected</h1>
+<p class="text-lg font-bold text-[#0d1b1a]">This product failed MedChain blockchain verification.</p>
+<p class="text-[#4c9a93] font-medium">Unique ID: <span class="text-alert-red font-mono">MC-8829-X92-FAIL</span></p>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+<div class="bg-white p-5 rounded-lg border border-alert-red/20 shadow-sm flex flex-col gap-3">
+<span class="material-symbols-outlined text-alert-red text-3xl">block</span>
+<h3 class="font-bold text-lg">Do Not Consume</h3>
+<p class="text-sm text-[#4c9a93] leading-relaxed">Stop immediately. This product is potentially dangerous and contains unverified ingredients.</p>
+</div>
+<div class="bg-white p-5 rounded-lg border border-alert-red/20 shadow-sm flex flex-col gap-3">
+<span class="material-symbols-outlined text-alert-red text-3xl">policy</span>
+<h3 class="font-bold text-lg">Contact Authorities</h3>
+<p class="text-sm text-[#4c9a93] leading-relaxed">Alert your local health department. They may need to investigate the retail source.</p>
+</div>
+<div class="bg-white p-5 rounded-lg border border-alert-red/20 shadow-sm flex flex-col gap-3">
+<span class="material-symbols-outlined text-alert-red text-3xl">inventory_2</span>
+<h3 class="font-bold text-lg">Secure Packaging</h3>
+<p class="text-sm text-[#4c9a93] leading-relaxed">Keep all original packaging and receipts as evidence for official investigation.</p>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="flex-1 bg-alert-red hover:bg-[#be123c] text-white font-bold py-4 px-6 rounded-lg transition-all flex items-center justify-center gap-2 shadow-lg hover:translate-y-[-2px]">
+<span class="material-symbols-outlined">report_gmailerrorred</span>
+                        Report Counterfeit to Manufacturer
+                    </button>
+<button class="bg-white hover:bg-gray-50 text-[#0d1b1a] font-bold py-4 px-8 rounded-lg border-2 border-alert-red transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">qr_code_scanner</span>
+                        Back to Scanner
+                    </button>
+</div>
+</div>
+<!-- Traceability Data -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+<div class="bg-white rounded-xl shadow-sm border border-[#e7f3f2] overflow-hidden">
+<div class="p-4 border-b border-[#e7f3f2] bg-[#f8fcfb] flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">location_on</span>
+<h3 class="font-bold">Scan Location Context</h3>
+</div>
+<div class="h-64 bg-gray-200 relative overflow-hidden">
+<img class="w-full h-full object-cover grayscale opacity-60" data-alt="Map of the scan location area" data-location="Berlin, Germany" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLS9MaMLIudAsABX8jk3jlvr3HgbdrDIpk1_bgkcgWjwjgWG8QIL5NhF7vJxuEvZTiuBGVRDLe7COk-JDBGRBY2BfM09-BumcJQceIyJjWoIBeU-LOlYXUu6qvK7fdsQF84zpZ6Xz_u_eRqeu_vEGOjfRm0QwLE9lxAZPpsb6ns4ExmhStwiNzbroi6ZSSlbdQleRio0mzXWfv4lFWbgoGBE8TbZ7154F6r9YWhdT_tr1tvksP5B3rgpG8Sl16OZ6B9phi1EAGyXii"/>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="relative">
+<span class="material-symbols-outlined text-alert-red text-5xl drop-shadow-md">location_on</span>
+<div class="absolute -top-1 -right-1 w-4 h-4 bg-alert-red rounded-full animate-ping"></div>
+</div>
+</div>
+</div>
+<div class="p-4 grid grid-cols-2 gap-4 text-sm">
+<div>
+<p class="text-[#4c9a93]">Timestamp</p>
+<p class="font-bold">Oct 24, 2023 - 14:22:05</p>
+</div>
+<div>
+<p class="text-[#4c9a93]">GPS Coordinates</p>
+<p class="font-bold">52.5200° N, 13.4050° E</p>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-xl shadow-sm border border-[#e7f3f2] p-6">
+<h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">info</span>
+                        Why was this flagged?
+                    </h3>
+<div class="space-y-4">
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-alert-red">error</span>
+<p class="text-sm leading-relaxed"><span class="font-bold">ID Duplication:</span> This specific product ID has been scanned 15 times in different geographic locations within the last 24 hours.</p>
+</div>
+<div class="flex gap-3">
+<span class="material-symbols-outlined text-alert-red">error</span>
+<p class="text-sm leading-relaxed"><span class="font-bold">Broken Chain of Custody:</span> There is no record of this batch leaving the certified manufacturer warehouse.</p>
+</div>
+<div class="mt-6 p-4 rounded-lg bg-primary/5 border border-primary/20">
+<p class="text-xs text-[#4c9a93] italic uppercase font-bold tracking-wider mb-2">Blockchain Proof</p>
+<p class="text-[10px] font-mono break-all text-primary">0x4b7f92a1103c8d9e23f8b091a27c6543b9201f8e654210d32f91a... (Invalid Hash)</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-white border-t border-[#e7f3f2] py-12 px-6 md:px-20">
+<div class="max-w-[1024px] mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+<div class="col-span-1 md:col-span-1">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">shield_moon</span>
+<span class="font-extrabold text-xl">MedChain</span>
+</div>
+<p class="text-sm text-[#4c9a93] leading-relaxed">Secure pharmaceutical verification powered by distributed ledger technology.</p>
+</div>
+<div>
+<h4 class="font-bold mb-4">Support</h4>
+<ul class="space-y-2 text-sm text-[#4c9a93]">
+<li><a class="hover:text-primary transition-colors" href="#">Help Center</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Report a Bug</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Emergency Hotlines</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">Legal</h4>
+<ul class="space-y-2 text-sm text-[#4c9a93]">
+<li><a class="hover:text-primary transition-colors" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Terms of Service</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">Regulatory Compliance</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold mb-4">Connect</h4>
+<div class="flex gap-4">
+<a class="h-8 w-8 rounded-lg bg-[#e7f3f2] flex items-center justify-center text-[#4c9a93] hover:text-primary" href="#">
+<span class="material-symbols-outlined text-lg">public</span>
+</a>
+<a class="h-8 w-8 rounded-lg bg-[#e7f3f2] flex items-center justify-center text-[#4c9a93] hover:text-primary" href="#">
+<span class="material-symbols-outlined text-lg">mail</span>
+</a>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-[#e7f3f2] text-center md:text-left">
+<p class="text-xs text-[#4c9a93]">© 2023 MedChain Global. All scans are recorded on the public ledger for safety transparency.</p>
+</div>
+</div>
+</footer>
+</div>
+</body></html>

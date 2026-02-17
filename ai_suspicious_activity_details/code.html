@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MedChain Admin - AI Suspicious Activity</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecda",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102220",
+                        "dark-sidebar": "#0b1514",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .grid-pattern {
+            background-image: radial-gradient(circle, rgba(19, 236, 218, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .pulse-red {
+            animation: pulse-red 2s infinite;
+        }
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+        .bg-gradient-tech {
+            background: linear-gradient(135deg, rgba(16, 34, 32, 1) 0%, rgba(11, 21, 20, 1) 100%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 overflow-hidden">
+<div class="flex h-screen w-full">
+<!-- Dark Sidebar Navigation -->
+<aside class="w-64 bg-dark-sidebar flex flex-col border-r border-white/5">
+<div class="p-6">
+<div class="flex items-center gap-3">
+<div class="bg-primary size-8 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-background-dark">shield_with_heart</span>
+</div>
+<div>
+<h1 class="text-white text-base font-bold leading-tight">MedChain</h1>
+<p class="text-primary text-[10px] font-medium tracking-widest uppercase">Admin Panel</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-2 mt-4">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-sm font-medium">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-sm font-medium">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary/10 text-primary rounded-lg transition-colors border border-primary/20" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+<span class="text-sm font-medium">AI Alerts</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="text-sm font-medium">Node Network</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-sm font-medium">Settings</span>
+</a>
+</nav>
+<div class="p-4 border-t border-white/5">
+<div class="flex items-center gap-3 px-3 py-2 bg-white/5 rounded-lg">
+<div class="size-8 rounded-full overflow-hidden bg-slate-700">
+<img alt="Profile" data-alt="Admin user profile picture" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD3aQhWBStOC2gBVvgmVaaSdmNKOnv-nZggD4zzaMLOmF3GZX5M4gWNZM51DMkySXYH3t4WlEsSm2Pp0Uql810HrnXQUOn-snq1a45Kb9cwVsBvZoGiCkXC6oQhlTxtyLqjhaGZXu9XA1m1854ZfIZuwQWKcXAVS-zAp4f5AVB9-nqHRSPl2iKB_K_PvlZ4oDVyiyY49HcKbRla6REaHJrFtckpxFyCT1XCtb0Ly3b86VF5HVxrvSFgVwAt2CqZdFkqEZqce5E8hFU4"/>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="text-white text-xs font-medium truncate">Dr. Aris Thorne</p>
+<p class="text-slate-500 text-[10px] truncate">Security Lead</p>
+</div>
+<span class="material-symbols-outlined text-slate-500 text-sm">logout</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 flex flex-col h-full bg-slate-50">
+<!-- Header -->
+<header class="h-16 bg-white border-b border-slate-200 px-8 flex items-center justify-between">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-slate-400">search</span>
+<input class="border-none focus:ring-0 text-sm w-64 bg-transparent" placeholder="Search suspicious nodes..." type="text"/>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary animate-pulse"></div>
+<span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider">AI Engine: Active</span>
+</div>
+<button class="relative p-2 text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1 right-1 size-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<div class="h-8 w-px bg-slate-200"></div>
+<button class="bg-primary text-background-dark px-4 py-1.5 rounded text-xs font-bold hover:brightness-110 transition-all">
+                        GENERATE REPORT
+                    </button>
+</div>
+</header>
+<!-- Stats Bar -->
+<section class="p-6 grid grid-cols-4 gap-6">
+<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Active Threats</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-2xl font-bold text-red-600">12</span>
+<span class="text-[10px] font-bold text-red-500 px-1.5 py-0.5 bg-red-50 rounded">+2 High Risk</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">System Health</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-2xl font-bold text-slate-800">98.4%</span>
+<span class="text-[10px] font-bold text-slate-400">-0.1%</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Nodes Scanned</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-2xl font-bold text-slate-800">1,402</span>
+<span class="text-[10px] font-bold text-primary px-1.5 py-0.5 bg-primary/10">+15% Total</span>
+</div>
+</div>
+<div class="bg-white p-4 rounded-xl shadow-sm border border-slate-200">
+<p class="text-slate-500 text-xs font-medium uppercase tracking-wider">Avg Response Time</p>
+<div class="flex items-baseline gap-2 mt-1">
+<span class="text-2xl font-bold text-slate-800">24ms</span>
+<span class="text-[10px] font-bold text-primary px-1.5 py-0.5 bg-primary/10">Optimal</span>
+</div>
+</div>
+</section>
+<!-- Map and Alerts Pane -->
+<div class="flex-1 px-6 pb-6 flex gap-6 overflow-hidden">
+<!-- Map Container -->
+<div class="flex-[3] relative rounded-xl overflow-hidden bg-slate-900 shadow-inner group">
+<!-- Map Background and Grid -->
+<div class="absolute inset-0 bg-slate-800/50 grid-pattern opacity-40"></div>
+<div class="absolute inset-0 z-0 overflow-hidden">
+<img alt="Network Map" class="w-full h-full object-cover opacity-30 mix-blend-luminosity scale-110" data-alt="Digital topographic world map with network nodes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXlFknnuRY7owafQmN1sBfRrHtJo-omKHh3SKsUbE2ZUwd2X9XQpQFZEdmerfP8m2w_lwJkDFung-J-wtt9C0x5Xwe5qIrqS_6RIVeInmuGzeOPGti_ZmPJSedRfeSxCRoZunbgl6ak_313WtBvaMeNO9WCZr3eEMy3pmDcN1HLphA-yxQZfv95oT90jyGHIX96LczZlWdzW_3DtaN-YngndA54vgUGgEXb4tvmAvoRE03lFNegred_zkZicKJw7vKp-qHuv6PO9sU"/>
+</div>
+<!-- Overlay Controls -->
+<div class="absolute top-4 left-4 z-20 flex flex-col gap-2">
+<button class="size-8 bg-white/10 backdrop-blur-md rounded border border-white/20 text-white flex items-center justify-center hover:bg-white/20">
+<span class="material-symbols-outlined text-sm">add</span>
+</button>
+<button class="size-8 bg-white/10 backdrop-blur-md rounded border border-white/20 text-white flex items-center justify-center hover:bg-white/20">
+<span class="material-symbols-outlined text-sm">remove</span>
+</button>
+</div>
+<div class="absolute bottom-4 left-4 z-20">
+<div class="bg-black/60 backdrop-blur-md p-3 rounded-lg border border-white/10 text-white flex items-center gap-4">
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-primary"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Normal</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="size-2 rounded-full bg-red-500 pulse-red"></div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-slate-400">Hotspot</span>
+</div>
+</div>
+</div>
+<!-- Hotspot Markers (Absolute positioned) -->
+<!-- NYC -->
+<div class="absolute top-[35%] left-[25%] z-10 group/marker">
+<div class="size-16 bg-red-500/20 rounded-full flex items-center justify-center pulse-red">
+<div class="size-3 bg-red-500 rounded-full border border-white/50"></div>
+</div>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-32 bg-slate-900 border border-red-500/50 p-2 rounded scale-0 group-hover/marker:scale-100 transition-transform origin-bottom">
+<p class="text-[10px] text-white font-bold">NODE: US-EAST-1</p>
+<p class="text-[9px] text-red-400">Threat Score: 92/100</p>
+</div>
+</div>
+<!-- London -->
+<div class="absolute top-[28%] left-[45%] z-10 group/marker">
+<div class="size-12 bg-red-500/20 rounded-full flex items-center justify-center pulse-red">
+<div class="size-3 bg-red-500 rounded-full border border-white/50"></div>
+</div>
+<div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-32 bg-slate-900 border border-red-500/50 p-2 rounded scale-0 group-hover/marker:scale-100 transition-transform origin-bottom">
+<p class="text-[10px] text-white font-bold">NODE: EU-WEST-2</p>
+<p class="text-[9px] text-red-400">Threat Score: 87/100</p>
+</div>
+</div>
+<!-- Normal Nodes -->
+<div class="absolute top-[60%] left-[70%] z-10">
+<div class="size-2 bg-primary/40 rounded-full"></div>
+</div>
+<div class="absolute top-[55%] left-[15%] z-10">
+<div class="size-2 bg-primary/40 rounded-full"></div>
+</div>
+<div class="absolute top-[20%] left-[80%] z-10">
+<div class="size-2 bg-primary/40 rounded-full"></div>
+</div>
+</div>
+<!-- Alerts Detail Pane -->
+<div class="flex-1 flex flex-col gap-4 overflow-y-auto">
+<h3 class="text-slate-800 font-bold text-sm uppercase tracking-wider flex items-center gap-2">
+<span class="material-symbols-outlined text-red-500 text-lg">bolt</span>
+                        Real-time Anomalies
+                    </h3>
+<!-- Alert Card 1 -->
+<div class="bg-white border-l-4 border-red-500 rounded-lg shadow-sm p-4 border border-slate-200">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold bg-red-100 text-red-600 px-2 py-0.5 rounded uppercase">Critical</span>
+<span class="text-[10px] text-slate-400 font-medium">Just now</span>
+</div>
+<h4 class="text-sm font-bold text-slate-800 leading-snug">Multiple scans detected in different locations</h4>
+<div class="mt-3 space-y-1.5 border-t border-slate-100 pt-3">
+<div class="flex justify-between text-[11px]">
+<span class="text-slate-400">User ID</span>
+<span class="text-slate-700 font-bold">8821-XQ</span>
+</div>
+<div class="flex justify-between text-[11px]">
+<span class="text-slate-400">Locations</span>
+<span class="text-slate-700 font-bold">NYC &amp; London</span>
+</div>
+<div class="flex justify-between text-[11px]">
+<span class="text-slate-400">Time Delta</span>
+<span class="text-red-600 font-bold">4.2 min</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-4">
+<button class="bg-primary text-background-dark py-2 rounded text-[11px] font-bold hover:brightness-110 transition-all">INVESTIGATE</button>
+<button class="border border-slate-200 text-slate-500 py-2 rounded text-[11px] font-bold hover:bg-slate-50 transition-all">DISMISS</button>
+</div>
+</div>
+<!-- Alert Card 2 -->
+<div class="bg-white border-l-4 border-amber-400 rounded-lg shadow-sm p-4 border border-slate-200">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold bg-amber-100 text-amber-600 px-2 py-0.5 rounded uppercase">Warning</span>
+<span class="text-[10px] text-slate-400 font-medium">12m ago</span>
+</div>
+<h4 class="text-sm font-bold text-slate-800 leading-snug">Unusual distribution pattern</h4>
+<p class="text-[11px] text-slate-500 mt-1">Data requests exceeding 99th percentile for node EU-WEST-2.</p>
+<div class="mt-3 space-y-1.5 border-t border-slate-100 pt-3">
+<div class="flex justify-between text-[11px]">
+<span class="text-slate-400">Frequency</span>
+<span class="text-slate-700 font-bold">1.2k req/sec</span>
+</div>
+<div class="flex justify-between text-[11px]">
+<span class="text-slate-400">Deviation</span>
+<span class="text-amber-600 font-bold">+450%</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-4">
+<button class="bg-primary text-background-dark py-2 rounded text-[11px] font-bold hover:brightness-110 transition-all">INVESTIGATE</button>
+<button class="border border-slate-200 text-slate-500 py-2 rounded text-[11px] font-bold hover:bg-slate-50 transition-all">DISMISS</button>
+</div>
+</div>
+<!-- Alert Card 3 -->
+<div class="bg-white border-l-4 border-slate-300 rounded-lg shadow-sm p-4 border border-slate-200 opacity-60">
+<div class="flex justify-between items-start mb-2">
+<span class="text-[10px] font-bold bg-slate-100 text-slate-500 px-2 py-0.5 rounded uppercase">Low Risk</span>
+<span class="text-[10px] text-slate-400 font-medium">45m ago</span>
+</div>
+<h4 class="text-sm font-bold text-slate-800 leading-snug">Brute force attempt blocked</h4>
+<div class="mt-3 space-y-1.5 border-t border-slate-100 pt-3">
+<div class="flex justify-between text-[11px]">
+<span class="text-slate-400">Origin IP</span>
+<span class="text-slate-700 font-bold">192.168.1.42</span>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 mt-4">
+<button class="bg-slate-100 text-slate-400 py-2 rounded text-[11px] font-bold cursor-not-allowed">INVESTIGATED</button>
+<button class="border border-slate-200 text-slate-500 py-2 rounded text-[11px] font-bold hover:bg-slate-50 transition-all">DISMISS</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

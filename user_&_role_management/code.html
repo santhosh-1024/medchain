@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MedChain Admin - User Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecda",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102220",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .bg-mesh {
+            background-color: #f6f8f8;
+            background-image: radial-gradient(at 0% 0%, rgba(19, 236, 218, 0.05) 0px, transparent 50%),
+                              radial-gradient(at 100% 100%, rgba(19, 236, 218, 0.05) 0px, transparent 50%);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark min-h-screen font-display text-slate-900">
+<div class="relative flex h-auto min-screen w-full flex-col bg-mesh overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col">
+<!-- Navigation Bar -->
+<header class="flex items-center justify-between border-b border-slate-200 bg-white/80 backdrop-blur-md px-6 py-3 sticky top-0 z-50">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-3">
+<div class="size-9 bg-primary flex items-center justify-center rounded-lg shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined text-white" style="font-size: 24px;">shield</span>
+</div>
+<h2 class="text-slate-900 text-xl font-bold leading-tight tracking-tight">MedChain Admin</h2>
+</div>
+<div class="hidden md:flex items-center gap-6">
+<nav class="flex items-center gap-6">
+<a class="text-slate-500 hover:text-primary transition-colors text-sm font-semibold" href="#">Dashboard</a>
+<a class="text-primary border-b-2 border-primary pb-4 mt-4 text-sm font-bold" href="#">User Management</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm font-semibold" href="#">Supply Chain</a>
+<a class="text-slate-500 hover:text-primary transition-colors text-sm font-semibold" href="#">Audits</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden lg:flex items-center bg-slate-100 rounded-lg px-3 py-1.5 border border-slate-200">
+<span class="material-symbols-outlined text-slate-400 text-lg">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-48 placeholder:text-slate-400" placeholder="Search resources..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:bg-slate-100 rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 mx-1"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-xs font-bold text-slate-900 leading-none">Alex Rivera</p>
+<p class="text-[10px] text-slate-500 uppercase tracking-wider font-bold">System Admin</p>
+</div>
+<div class="size-10 rounded-full bg-slate-200 border-2 border-primary/20 p-0.5 overflow-hidden">
+<img class="w-full h-full rounded-full object-cover" data-alt="Admin profile headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDiPvdIt_4FVRL5KbwM8N-wvvUaKrFhcEAOkI-_riqCXZjBnROK_eKVkiuwQ1VydmpLaO9rtv4Twa-2C_-_Fo7GWrj-KA648iz6tSr18oN6CZz0Ya8SQdM9MSVGxl-gjRgvN7UK5pkDbR99yJ76MYIibtAJofnuf1q6uCbnEfM3ob5d0tppH6Ik0flzT8n03KD54DX57xuyOqEJoz5bpUvJtgNpC4EcWeWvlJLYj1ciMeFkqNeoMJS7BNHFezSeSQDc5gl14gPiUpL0"/>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-[1400px] mx-auto w-full px-6 py-8">
+<!-- Breadcrumbs & Title -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<div class="flex items-center gap-2 text-slate-500 text-sm font-medium mb-2">
+<span>Admin</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-primary font-semibold">User Management</span>
+</div>
+<h1 class="text-3xl font-black text-slate-900 tracking-tight">Identity Governance</h1>
+<p class="text-slate-500 mt-1 max-w-xl">Provision and audit blockchain identities for verified medical participants across the global supply chain.</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2.5 bg-white border border-slate-200 text-slate-700 rounded-lg font-bold text-sm hover:bg-slate-50 transition-all shadow-sm">
+<span class="material-symbols-outlined text-lg">download</span>
+                            Export Audit Log
+                        </button>
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-slate-900 rounded-lg font-bold text-sm hover:brightness-105 transition-all shadow-lg shadow-primary/20">
+<span class="material-symbols-outlined text-lg">person_add</span>
+                            Onboard New User
+                        </button>
+</div>
+</div>
+<!-- Filters Section -->
+<div class="bg-white rounded-xl border border-slate-200 p-4 mb-6 shadow-sm flex flex-wrap items-center gap-4">
+<div class="flex-1 min-w-[300px] relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+<input class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border-slate-200 rounded-lg focus:ring-primary focus:border-primary transition-all text-sm" placeholder="Search by name, wallet address, or ENS domain..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-lg">category</span>
+                            All Roles
+                            <span class="material-symbols-outlined text-lg">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-lg">check_circle</span>
+                            Status: Active
+                            <span class="material-symbols-outlined text-lg">keyboard_arrow_down</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-sm font-semibold text-slate-600 hover:bg-slate-100 transition-colors">
+<span class="material-symbols-outlined text-lg">verified_user</span>
+                            Verification
+                            <span class="material-symbols-outlined text-lg">keyboard_arrow_down</span>
+</button>
+<div class="w-[1px] h-8 bg-slate-200 mx-1"></div>
+<button class="p-2 text-slate-400 hover:text-slate-600">
+<span class="material-symbols-outlined">filter_list_off</span>
+</button>
+</div>
+</div>
+<!-- User Table -->
+<div class="bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-slate-50 border-b border-slate-200">
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-slate-500">Participant &amp; Wallet</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-slate-500">Organization Role</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-slate-500">Security Status</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-slate-500">Last Activity</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-slate-500">Verification</th>
+<th class="px-6 py-4 text-[11px] font-black uppercase tracking-wider text-slate-500 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<!-- Row 1 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User avatar thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC8qHMudfADLuNEH5zYOvFuSR2UJRnStWDi9yYp_3WlCYYLadtE2yyw8ZAPF3XFHZxX2v0JHMCU-VyMaqhX69FecWUKO3_Y_S7PWbi5t5dQniRv60TiHnhfev7UwfE3NG4glp22Q0mDWeL7vQWJIgicBzpdtyptJ_DjXWyOJbE804PwujRW7vc0LVYG1OiWcZfRrk8mslV3jByqBFHaTSGbOCF9pYGaJ_gsTFwKohYTbwJtXD3R2PsD51ttNsluRXiXdhdFIu0VR9_A"/>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900">BioGen Global Lab</p>
+<div class="flex items-center gap-1 mt-0.5">
+<code class="text-[11px] font-mono text-slate-400 bg-slate-50 px-1 rounded">0x71C...4e21</code>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-blue-50 text-blue-700 border border-blue-100">
+<span class="material-symbols-outlined text-xs mr-1">factory</span>
+                                            Manufacturer
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="size-2 rounded-full bg-emerald-500"></span>
+<span class="text-xs font-semibold text-slate-700">Active</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs text-slate-600 font-medium">2 mins ago</p>
+<p class="text-[10px] text-slate-400">Inventory Update</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-lg font-bold">verified</span>
+<span class="text-[11px] font-bold uppercase tracking-tight">On-Chain Verified</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-white hover:shadow-sm rounded-lg text-slate-400 hover:text-slate-600 transition-all border border-transparent hover:border-slate-200">
+<span class="material-symbols-outlined text-xl">edit_square</span>
+</button>
+<button class="px-3 py-1.5 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors shadow-sm">
+                                                Manage
+                                            </button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User avatar thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2cGgUri5hpTwT7X7eKpgf0RtikUGpUOcJsrNm9MbrA2ygFdPVc2bJa2RNi6Ota3iLpxO9-LQGSsqXGzCn_r0m6mMx4dN7eWAQk1agyaAaCL-2WONQP8BL-Udx6z7OUiaH10k1NYeTTAgZKpFcVsyAhzlAB-lQjcjIP5Ein6fB4qHp6Uvff8g87Ma3t4DFMnMFyezhhYMqtvh6CvMDB23u4Q-xrASUEP40Onk2jv21WUBv--kPAbm114H_Pdzt2tC_84IWVmhm7Hy4"/>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900">SwiftLogix Distro</p>
+<div class="flex items-center gap-1 mt-0.5">
+<code class="text-[11px] font-mono text-slate-400 bg-slate-50 px-1 rounded">0xA3B...F891</code>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-100">
+<span class="material-symbols-outlined text-xs mr-1">local_shipping</span>
+                                            Distributor
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="size-2 rounded-full bg-emerald-500"></span>
+<span class="text-xs font-semibold text-slate-700">Active</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs text-slate-600 font-medium">14 hours ago</p>
+<p class="text-[10px] text-slate-400">Batch Transit Start</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-lg font-bold">verified</span>
+<span class="text-[11px] font-bold uppercase tracking-tight">On-Chain Verified</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-white hover:shadow-sm rounded-lg text-slate-400 hover:text-slate-600 transition-all border border-transparent hover:border-slate-200">
+<span class="material-symbols-outlined text-xl">edit_square</span>
+</button>
+<button class="px-3 py-1.5 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors shadow-sm">
+                                                Manage
+                                            </button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User avatar thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuABF8k7wvBdkAKlTFUSp1wEPVEM-MQOvZI32dxYU6M4KlfzGKKWwDPjxfK6PJEiI7_4_P4ddoaN4up8c0OxGPm7qhKpqa9CQOkm3rUEDlHWUcjPpPorW4fWXXD0eUhgYzsgVUPou7Tg6p5PUpSpnLaPr8Tr79ro-u8ssxh5qcE_WNyaBSUroZ9jS3nz3yVZH0yI5oi8aRX8KQqUvfMnSWpqJ7UxUUw3jp6RZc2sdaqY9gyT6OffUXPgngaAS2qOYj_Ysi_YX8xO1dHq"/>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900">City Central Health</p>
+<div class="flex items-center gap-1 mt-0.5">
+<code class="text-[11px] font-mono text-slate-400 bg-slate-50 px-1 rounded">0x9D2...77C0</code>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-100">
+<span class="material-symbols-outlined text-xs mr-1">medication</span>
+                                            Pharmacy
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="size-2 rounded-full bg-slate-300"></span>
+<span class="text-xs font-semibold text-slate-400 italic">Suspended</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs text-slate-600 font-medium">3 days ago</p>
+<p class="text-[10px] text-slate-400">Login Attempt</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-slate-300">
+<span class="material-symbols-outlined text-lg">pending_actions</span>
+<span class="text-[11px] font-bold uppercase tracking-tight">Re-Audit Required</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-white hover:shadow-sm rounded-lg text-slate-400 hover:text-slate-600 transition-all border border-transparent hover:border-slate-200">
+<span class="material-symbols-outlined text-xl">edit_square</span>
+</button>
+<button class="px-3 py-1.5 bg-primary text-slate-900 rounded-lg text-xs font-bold hover:brightness-105 transition-colors shadow-sm">
+                                                Re-Approve
+                                            </button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-primary/5 transition-colors group">
+<td class="px-6 py-4">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="User avatar thumbnail" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgROoabe4mL-rPjQ4N-XQVHuxJAw1wMIye15l87QK52SoebrFVNKvJdtcf8BEtLTsHb8ckjhOitqCiJvDdsHbFpT8xdi7c8U36rk16YszGuM300JIEIXRdp-IBRePgaw7tta8NFMyThfTUqgIEo_Hk9TnUF5pMNsC5_qqkDY3SwWDZ_km5JYsQqzAtvaw1m2wVk5KDhV4_g7Vvkytte4gscsolsuR6wPXcvSTeVR4D0gDnoU5iV6rj4oECZGAQBIBnjXZbkZ2RPJUo"/>
+</div>
+<div>
+<p class="text-sm font-bold text-slate-900">Apex Pharma Retail</p>
+<div class="flex items-center gap-1 mt-0.5">
+<code class="text-[11px] font-mono text-slate-400 bg-slate-50 px-1 rounded">0x5E8...2A11</code>
+<button class="text-slate-300 hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+</button>
+</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold bg-purple-50 text-purple-700 border border-purple-100">
+<span class="material-symbols-outlined text-xs mr-1">medication</span>
+                                            Pharmacy
+                                        </span>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1.5">
+<span class="size-2 rounded-full bg-emerald-500 animate-pulse"></span>
+<span class="text-xs font-semibold text-slate-700">Active</span>
+</div>
+</td>
+<td class="px-6 py-4">
+<p class="text-xs text-slate-600 font-medium">Just now</p>
+<p class="text-[10px] text-slate-400">Signature Applied</p>
+</td>
+<td class="px-6 py-4">
+<div class="flex items-center gap-1 text-primary">
+<span class="material-symbols-outlined text-lg font-bold">verified</span>
+<span class="text-[11px] font-bold uppercase tracking-tight">On-Chain Verified</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<div class="flex items-center justify-end gap-2">
+<button class="p-2 hover:bg-white hover:shadow-sm rounded-lg text-slate-400 hover:text-slate-600 transition-all border border-transparent hover:border-slate-200">
+<span class="material-symbols-outlined text-xl">edit_square</span>
+</button>
+<button class="px-3 py-1.5 bg-slate-900 text-white rounded-lg text-xs font-bold hover:bg-slate-800 transition-colors shadow-sm">
+                                                Manage
+                                            </button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
+<p class="text-xs font-medium text-slate-500">Showing <span class="text-slate-900 font-bold">1-4</span> of <span class="text-slate-900 font-bold">142</span> medical participants</p>
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded-lg border border-slate-200 bg-white text-slate-400 hover:text-slate-600 hover:bg-slate-50 transition-colors disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-lg leading-none">chevron_left</span>
+</button>
+<div class="flex items-center gap-1">
+<button class="size-8 rounded-lg bg-primary text-slate-900 text-xs font-bold flex items-center justify-center">1</button>
+<button class="size-8 rounded-lg text-slate-600 text-xs font-bold flex items-center justify-center hover:bg-slate-100">2</button>
+<button class="size-8 rounded-lg text-slate-600 text-xs font-bold flex items-center justify-center hover:bg-slate-100">3</button>
+<span class="text-slate-300 mx-1">...</span>
+<button class="size-8 rounded-lg text-slate-600 text-xs font-bold flex items-center justify-center hover:bg-slate-100">12</button>
+</div>
+<button class="p-1.5 rounded-lg border border-slate-200 bg-white text-slate-600 hover:bg-slate-50 transition-colors">
+<span class="material-symbols-outlined text-lg leading-none">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Footer Stats -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="bg-white/50 border border-slate-200 rounded-xl p-4 flex items-center gap-4">
+<div class="size-10 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">group</span>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Total Active</p>
+<p class="text-xl font-bold text-slate-900 leading-none">128</p>
+</div>
+</div>
+<div class="bg-white/50 border border-slate-200 rounded-xl p-4 flex items-center gap-4">
+<div class="size-10 bg-purple-50 text-purple-600 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Blockchain Verified</p>
+<p class="text-xl font-bold text-slate-900 leading-none">94%</p>
+</div>
+</div>
+<div class="bg-white/50 border border-slate-200 rounded-xl p-4 flex items-center gap-4">
+<div class="size-10 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">pending</span>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">Pending Audit</p>
+<p class="text-xl font-bold text-slate-900 leading-none">14</p>
+</div>
+</div>
+<div class="bg-white/50 border border-slate-200 rounded-xl p-4 flex items-center gap-4">
+<div class="size-10 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">security_update_good</span>
+</div>
+<div>
+<p class="text-[10px] font-black uppercase text-slate-400 tracking-wider">System Integrity</p>
+<p class="text-xl font-bold text-slate-900 leading-none">Secure</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Note -->
+<footer class="mt-auto px-6 py-4 text-center border-t border-slate-200 bg-white/50">
+<p class="text-xs text-slate-400 font-medium">MedChain Admin Dashboard v4.2.0 • Secured by Ethereum Blockchain Infrastructure</p>
+</footer>
+</div>
+</div>
+</body></html>

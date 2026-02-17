@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MedChain | Scan History &amp; Safety Alerts</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ecda",
+                        "background-light": "#f6f8f8",
+                        "background-dark": "#102220",
+                    },
+                    fontFamily: {
+                        "display": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="sticky top-0 z-50 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md border-b border-primary/10">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<div class="flex items-center gap-8">
+<div class="flex items-center gap-2 text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="shield_health">shield</span>
+<h1 class="text-xl font-bold tracking-tight text-slate-800 dark:text-white">MedChain</h1>
+</div>
+<nav class="hidden md:flex items-center gap-6">
+<a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#">Dashboard</a>
+<a class="text-sm font-semibold text-primary" href="#">Scans</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#">Alerts</a>
+<a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors" href="#">Support</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-1.5 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/50 w-64" placeholder="Search medicines..." type="text"/>
+</div>
+<button class="p-2 text-slate-500 hover:bg-primary/10 rounded-lg transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-primary/20 border border-primary/30 overflow-hidden">
+<img alt="Profile" class="w-full h-full object-cover" data-alt="Healthcare professional user profile avatar headshot" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQi4ONDz4vxIPL3aEwoUCZqhbbspaSjpEXpRuoW9Rk2tBm5WB8FEBKtdJjaKEjp07IK6Kt8nfRF8BIwqgLvWXyMm3TAP8KnIbxxcs8CMeSKa4XjGAfvY5Kpbf7sB87XjNQze5d7Wh5dWKV6L3eeGUWUXBCjeUj1HMYdqmXUhgADnTte_KZZUW-nGynIzfMdpxMx3QiZJbE_REcCnr6G_SuoMI9cjsHHSkT06tHn4Z8KBQsqDs9wJCctYCIv60Yz2AON5gwL4Ah262A"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<!-- Header & Title Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div class="space-y-1">
+<div class="flex items-center gap-3">
+<h2 class="text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">My Scan History &amp; Safety Alerts</h2>
+<span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold tracking-wider uppercase border border-primary/20">
+<span class="material-symbols-outlined text-xs" data-icon="verified">verified</span>
+                        Blockchain Verified
+                    </span>
+</div>
+<p class="text-slate-500 dark:text-slate-400 text-lg">Review previously verified medicines and important safety warnings</p>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2 bg-primary text-slate-900 font-bold rounded-lg hover:shadow-lg hover:shadow-primary/20 transition-all">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+                    Scan New Medicine
+                </button>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Left: Scan History List -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Active Item / Detailed View -->
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-6 border-b border-slate-100 dark:border-slate-800 flex justify-between items-start">
+<div class="flex gap-4">
+<div class="w-16 h-16 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-3xl" data-icon="medication">medication</span>
+</div>
+<div>
+<h3 class="text-xl font-bold text-slate-900 dark:text-white">Lipitor (Atorvastatin)</h3>
+<p class="text-sm text-slate-500 font-mono">BATCH ID: #MC-99281</p>
+<div class="flex items-center gap-2 mt-1 text-xs text-slate-400">
+<span class="material-symbols-outlined text-xs" data-icon="calendar_today">calendar_today</span>
+                                    Jan 14, 2024 • 10:45 AM
+                                    <span class="mx-1">•</span>
+<span class="material-symbols-outlined text-xs" data-icon="location_on">location_on</span>
+                                    New York, NY
+                                </div>
+</div>
+</div>
+<span class="px-3 py-1 rounded-lg bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-bold uppercase tracking-wide border border-green-200 dark:border-green-800">
+                            Genuine
+                        </span>
+</div>
+<div class="p-6 bg-slate-50/50 dark:bg-slate-800/50">
+<p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">Supply Chain Verification Timeline</p>
+<div class="relative">
+<!-- Timeline Line -->
+<div class="absolute left-4 top-0 bottom-0 w-0.5 bg-slate-200 dark:bg-slate-700 md:left-0 md:right-0 md:h-0.5 md:w-full md:top-4"></div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+<!-- Step 1 -->
+<div class="flex flex-row md:flex-col items-start md:items-center gap-4 text-center">
+<div class="z-10 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white ring-4 ring-white dark:ring-slate-900">
+<span class="material-symbols-outlined text-sm" data-icon="factory">factory</span>
+</div>
+<div class="text-left md:text-center pt-1 md:pt-0">
+<p class="text-xs font-bold text-slate-900 dark:text-white">Manufacturer</p>
+<p class="text-[10px] text-slate-500">Verified Jan 02</p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex flex-row md:flex-col items-start md:items-center gap-4 text-center">
+<div class="z-10 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white ring-4 ring-white dark:ring-slate-900">
+<span class="material-symbols-outlined text-sm" data-icon="local_shipping">local_shipping</span>
+</div>
+<div class="text-left md:text-center pt-1 md:pt-0">
+<p class="text-xs font-bold text-slate-900 dark:text-white">Distributor</p>
+<p class="text-[10px] text-slate-500">Verified Jan 05</p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex flex-row md:flex-col items-start md:items-center gap-4 text-center">
+<div class="z-10 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white ring-4 ring-white dark:ring-slate-900">
+<span class="material-symbols-outlined text-sm" data-icon="local_pharmacy">local_pharmacy</span>
+</div>
+<div class="text-left md:text-center pt-1 md:pt-0">
+<p class="text-xs font-bold text-slate-900 dark:text-white">Pharmacy</p>
+<p class="text-[10px] text-slate-500">Verified Jan 12</p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="flex flex-row md:flex-col items-start md:items-center gap-4 text-center">
+<div class="z-10 w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white ring-4 ring-white dark:ring-slate-900">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span>
+</div>
+<div class="text-left md:text-center pt-1 md:pt-0">
+<p class="text-xs font-bold text-slate-900 dark:text-white">Consumer</p>
+<p class="text-[10px] text-slate-500">Verified Jan 14</p>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-slate-100 dark:bg-slate-900 rounded-lg border border-slate-200 dark:border-slate-700">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Blockchain Proof (Tx Hash)</span>
+<button class="text-primary hover:underline text-[10px] font-bold">VIEW ON EXPLORER</button>
+</div>
+<div class="flex items-center justify-between gap-4">
+<code class="text-xs text-slate-600 dark:text-slate-300 break-all font-mono">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</code>
+<button class="material-symbols-outlined text-slate-400 hover:text-primary transition-colors" data-icon="content_copy">content_copy</button>
+</div>
+</div>
+</div>
+</div>
+<!-- History List Items -->
+<div class="space-y-4">
+<h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider px-2">Recent Scans</h4>
+<!-- Item 2 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 flex items-center justify-between group cursor-pointer hover:border-primary/40 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="pill">pill</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white">Amoxicillin 500mg</p>
+<p class="text-xs text-slate-500 font-mono">BATCH: #AMX-8821</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:block text-right">
+<p class="text-xs font-medium text-slate-900 dark:text-white">Dec 22, 2023</p>
+<p class="text-[10px] text-slate-500">Chicago, IL</p>
+</div>
+<span class="px-2 py-0.5 rounded-md bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 text-[10px] font-bold uppercase tracking-wide border border-orange-200 dark:border-orange-800">
+                                Expired
+                            </span>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 flex items-center justify-between group cursor-pointer hover:border-primary/40 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-slate-100 dark:bg-slate-800 rounded-lg flex items-center justify-center text-slate-400 group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="vaccines">vaccines</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white">Metformin HCL</p>
+<p class="text-xs text-slate-500 font-mono">BATCH: #MTF-0019</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:block text-right">
+<p class="text-xs font-medium text-slate-900 dark:text-white">Nov 15, 2023</p>
+<p class="text-[10px] text-slate-500">Houston, TX</p>
+</div>
+<span class="px-2 py-0.5 rounded-md bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[10px] font-bold uppercase tracking-wide border border-green-200 dark:border-green-800">
+                                Genuine
+                            </span>
+</div>
+</div>
+<!-- Item 4 (Counterfeit) -->
+<div class="bg-white dark:bg-slate-900 p-4 rounded-xl shadow-sm border border-red-100 dark:border-red-900/30 flex items-center justify-between group cursor-pointer hover:bg-red-50/50 dark:hover:bg-red-900/10 transition-all">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center text-red-500">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div>
+<p class="font-bold text-slate-900 dark:text-white">Zolpidem 10mg</p>
+<p class="text-xs text-slate-500 font-mono">BATCH: #UNKNOWN</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="hidden sm:block text-right">
+<p class="text-xs font-medium text-slate-900 dark:text-white">Oct 30, 2023</p>
+<p class="text-[10px] text-slate-500">Miami, FL</p>
+</div>
+<span class="px-2 py-0.5 rounded-md bg-red-100 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-[10px] font-bold uppercase tracking-wide border border-red-200 dark:border-red-800">
+                                Counterfeit
+                            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Safety Alerts Sidebar -->
+<div class="lg:col-span-4 space-y-6">
+<div class="bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800 overflow-hidden">
+<div class="p-4 bg-slate-50 dark:bg-slate-800/50 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between">
+<h3 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="campaign">campaign</span>
+                            Safety Alerts
+                        </h3>
+<span class="px-2 py-1 bg-red-500 text-white text-[10px] font-black rounded-full">2 NEW</span>
+</div>
+<div class="p-4 space-y-4">
+<!-- Alert 1 -->
+<div class="p-4 rounded-lg bg-red-50 dark:bg-red-900/10 border-l-4 border-red-500 space-y-2">
+<div class="flex justify-between items-start">
+<p class="text-xs font-black text-red-600 dark:text-red-400 uppercase tracking-tight">Recall Alert</p>
+<span class="text-[10px] text-slate-400">2h ago</span>
+</div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">Batch #AX-201 Recall</p>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Potential contamination detected in regional supply chain for Ibuprofen brands.</p>
+<button class="text-xs font-bold text-red-600 dark:text-red-400 underline decoration-2 underline-offset-4">Read Full Notice</button>
+</div>
+<!-- Alert 2 -->
+<div class="p-4 rounded-lg bg-orange-50 dark:bg-orange-900/10 border-l-4 border-orange-500 space-y-2">
+<div class="flex justify-between items-start">
+<p class="text-xs font-black text-orange-600 dark:text-orange-400 uppercase tracking-tight">Regional Warning</p>
+<span class="text-[10px] text-slate-400">1d ago</span>
+</div>
+<p class="text-sm font-bold text-slate-900 dark:text-white">Counterfeit Aspirin Spike</p>
+<p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">High volume of fake 81mg Aspirin detected in New York area pharmacies.</p>
+</div>
+<button class="w-full py-2 text-center text-xs font-bold text-slate-400 hover:text-primary transition-colors">VIEW ALL ARCHIVED ALERTS</button>
+</div>
+</div>
+<!-- Safety Tips Card -->
+<div class="bg-primary/5 dark:bg-primary/10 rounded-xl border border-primary/20 p-6 space-y-4">
+<h4 class="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="lightbulb">lightbulb</span>
+                        Patient Safety Tips
+                    </h4>
+<ul class="space-y-3">
+<li class="flex items-start gap-3 text-xs text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-sm shrink-0" data-icon="check_circle">check_circle</span>
+                            Always check for tamper-evident seals before opening a new medicine.
+                        </li>
+<li class="flex items-start gap-3 text-xs text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-sm shrink-0" data-icon="check_circle">check_circle</span>
+                            QR codes should be crisp and easily scannable; report blurry or peeling labels.
+                        </li>
+<li class="flex items-start gap-3 text-xs text-slate-600 dark:text-slate-300">
+<span class="material-symbols-outlined text-primary text-sm shrink-0" data-icon="check_circle">check_circle</span>
+                            Cross-reference the batch ID on the box with the scan result in MedChain.
+                        </li>
+</ul>
+</div>
+<!-- Action Buttons -->
+<div class="space-y-3">
+<button class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl font-bold text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="map">map</span>
+                        Find Nearest Authorized Pharmacy
+                    </button>
+<button class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl font-bold text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-50 transition-colors shadow-sm">
+<span class="material-symbols-outlined text-primary" data-icon="support_agent">support_agent</span>
+                        Contact Support
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<footer class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 border-t border-slate-200 dark:border-slate-800 mt-12">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="flex items-center gap-2 opacity-50">
+<span class="material-symbols-outlined" data-icon="shield_health">shield</span>
+<span class="font-bold text-lg">MedChain</span>
+</div>
+<p class="text-xs text-slate-500">© 2024 MedChain Blockchain Healthcare Systems. All scan data is encrypted and secured on the Ethereum layer-2 network.</p>
+<div class="flex gap-6">
+<a class="text-xs text-slate-400 hover:text-primary" href="#">Privacy Policy</a>
+<a class="text-xs text-slate-400 hover:text-primary" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</body></html>

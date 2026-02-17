@@ -1,0 +1,32 @@
+# node_modules
+node_modules/
+.npm/
+
+# build
+dist/
+build/
+.next/
+out/
+
+# env
+.env*
+!.env.example
+
+# logs
+*.log
+npm-debug.log*
+
+# system
+.DS_Store
+Thumbs.db
+
+# ide
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# antigravity/gemini specific
+.gemini/
+.agent/
+brain/
