@@ -2,22 +2,30 @@ import React from 'react';
 
 const UserStats = () => {
     const stats = [
-        { label: 'Total Active', value: '128', icon: 'group', bg: 'bg-emerald-50 dark:bg-emerald-900/20', color: 'text-emerald-600 dark:text-emerald-400' },
-        { label: 'Blockchain Verified', value: '94%', icon: 'verified', bg: 'bg-purple-50 dark:bg-purple-900/20', color: 'text-purple-600 dark:text-purple-400' },
-        { label: 'Pending Audit', value: '14', icon: 'pending', bg: 'bg-amber-50 dark:bg-amber-900/20', color: 'text-amber-600 dark:text-amber-400' },
-        { label: 'System Integrity', value: 'Secure', icon: 'security_update_good', bg: 'bg-blue-50 dark:bg-blue-900/20', color: 'text-blue-600 dark:text-blue-400' },
+        { label: 'Total Entities', value: '142', sub: '+12 this month', icon: 'groups', color: 'text-primary', bg: 'bg-primary' },
+        { label: 'KYC Verified', value: '128', sub: '92.4% compliance', icon: 'verified_user', color: 'text-emerald-500', bg: 'bg-emerald-500' },
+        { label: 'Pending Approval', value: '4', sub: 'Requires action', icon: 'pending_actions', color: 'text-amber-500', bg: 'bg-amber-500' },
+        { label: 'Suspended', value: '3', sub: 'Security violations', icon: 'block', color: 'text-red-500', bg: 'bg-red-500' },
     ];
 
     return (
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {stats.map((stat, index) => (
-                <div key={index} className="bg-white/50 dark:bg-slate-900/50 border border-slate-200 dark:border-slate-800 rounded-xl p-4 flex items-center gap-4">
-                    <div className={`size-10 rounded-full flex items-center justify-center ${stat.bg} ${stat.color}`}>
-                        <span className="material-symbols-outlined">{stat.icon}</span>
+                <div key={index} className="medical-card border-none bg-white p-6 group hover:translate-y-[-4px] transition-all cursor-default">
+                    <div className="flex items-center justify-between mb-4">
+                        <div className={`size-12 rounded-2xl ${stat.bg}/10 ${stat.color} flex items-center justify-center shadow-sm border border-slate-100`}>
+                            <span className="material-symbols-outlined text-[24px] font-bold group-hover:scale-110 transition-transform">{stat.icon}</span>
+                        </div>
+                        <div className="text-right">
+                            <p className="text-[10px] font-black text-text-muted uppercase tracking-[0.2em]">{stat.label}</p>
+                            <p className="text-2xl font-black text-text-main tracking-tighter mt-1">{stat.value}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p className="text-[10px] font-black uppercase text-slate-400 tracking-wider">{stat.label}</p>
-                        <p className="text-xl font-bold text-slate-900 dark:text-white leading-none">{stat.value}</p>
+                    <div className="flex items-center gap-1.5">
+                        <span className={`material-symbols-outlined text-[14px] ${stat.label === 'Suspended' ? 'text-red-500' : 'text-emerald-500'}`}>
+                            {stat.label === 'Suspended' ? 'trending_up' : 'trending_up'}
+                        </span>
+                        <p className="text-[11px] font-bold text-text-muted">{stat.sub}</p>
                     </div>
                 </div>
             ))}

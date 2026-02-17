@@ -1,75 +1,140 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const BatchTable = () => {
-    const batches = [
-        { id: 'BCH-882-X', name: 'Amoxicillin 250mg', status: 'Active', expiry: '2025-12-15', storage: '20-25°C', statusColor: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' },
-        { id: 'BCH-771-Y', name: 'Insulin Glargine', status: 'Expired', expiry: '2023-10-01', storage: '2-8°C', statusColor: 'bg-amber-100 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400' },
-        { id: 'BCH-104-Z', name: 'Lisinopril 10mg', status: 'Recalled', expiry: '2026-05-20', storage: '20-25°C', statusColor: 'bg-rose-100 text-rose-600 dark:bg-rose-900/30 dark:text-rose-400', rowClass: 'bg-rose-50/20 dark:bg-rose-900/10' },
-        { id: 'BCH-552-K', name: 'Atorvastatin 40mg', status: 'Active', expiry: '2025-08-11', storage: '20-25°C', statusColor: 'bg-emerald-100 text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400' },
-    ];
+    const [batches, setBatches] = useState([
+        {
+            id: 'BCH-882194',
+            name: 'Amoxicillin 250mg',
+            status: 'Active',
+            mfd: '2024-01-10',
+            expiry: '2025-12-15',
+            storage: '20-25°C',
+            scans: 42,
+            alerts: 0,
+            txHash: '0x3a4...e92'
+        },
+        {
+            id: 'BCH-771821',
+            name: 'Insulin Glargine',
+            status: 'Warning',
+            mfd: '2023-09-01',
+            expiry: '2023-11-01',
+            storage: '2-8°C',
+            scans: 128,
+            alerts: 2,
+            txHash: '0x992...c44'
+        },
+        {
+            id: 'BCH-104992',
+            name: 'Lisinopril 10mg',
+            status: 'Recalled',
+            mfd: '2024-02-15',
+            expiry: '2026-05-20',
+            storage: '20-25°C',
+            scans: 15,
+            alerts: 1,
+            txHash: '0x12a...b78'
+        },
+        {
+            id: 'BCH-552711',
+            name: 'Atorvastatin 40mg',
+            status: 'Active',
+            mfd: '2024-03-20',
+            expiry: '2025-08-11',
+            storage: '20-25°C',
+            scans: 0,
+            alerts: 0,
+            txHash: '0xfd4...a12'
+        },
+    ]);
+
+    const handleRecall = (id) => {
+        setBatches(batches.map(b => b.id === id ? { ...b, status: 'Recalled' } : u));
+    };
 
     return (
-        <div className="medical-card p-0 overflow-hidden">
-            <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-white">
-                <div>
-                    <h3 className="font-bold text-lg text-text-main">Registered Batches</h3>
-                    <p className="text-xs text-text-muted">Manage and monitor pharmaceutical production batches</p>
-                </div>
-                <div className="flex gap-2">
-                    <button className="p-2 hover:bg-slate-50 rounded-lg text-text-muted transition-colors border border-transparent hover:border-slate-200">
-                        <span className="material-symbols-outlined text-xl">filter_list</span>
-                    </button>
-                    <button className="p-2 hover:bg-slate-50 rounded-lg text-text-muted transition-colors border border-transparent hover:border-slate-200">
-                        <span className="material-symbols-outlined text-xl">download</span>
-                    </button>
-                </div>
-            </div>
+        <div className="medical-card p-0 overflow-hidden border-none shadow-none bg-white">
             <div className="overflow-x-auto">
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className="text-[12px] font-bold text-text-muted uppercase tracking-widest bg-slate-50/50">
-                            <th className="px-6 py-4">Batch ID</th>
-                            <th className="px-6 py-4">Medicine Name</th>
-                            <th className="px-6 py-4">Status</th>
-                            <th className="px-6 py-4">Expiry Date</th>
-                            <th className="px-6 py-4">Storage Info</th>
-                            <th className="px-6 py-4 text-right">Actions</th>
+                        <tr className="bg-slate-50/50 text-[11px] font-black text-text-muted uppercase tracking-[0.2em] border-b border-slate-100">
+                            <th className="px-6 py-5">Batch & Product</th>
+                            <th className="px-6 py-5">Status</th>
+                            <th className="px-6 py-5">Mfd / Exp</th>
+                            <th className="px-6 py-5 text-center">Analytics</th>
+                            <th className="px-6 py-5 text-right">Ledger Actions</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 text-sm">
                         {batches.map((batch) => (
-                            <tr key={batch.id} className={`hover:bg-slate-50/50 transition-colors ${batch.rowClass || ''}`}>
-                                <td className="px-6 py-4 font-mono text-[13px] text-primary font-bold cursor-pointer hover:underline">{batch.id}</td>
-                                <td className="px-6 py-4">
-                                    <div className="font-semibold text-text-main">{batch.name}</div>
+                            <tr key={batch.id} className="hover:bg-slate-50/50 transition-colors group">
+                                <td className="px-6 py-5">
+                                    <div className="flex items-center gap-4">
+                                        <div className="size-11 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-primary group-hover:scale-110 transition-transform">
+                                            <span className="material-symbols-outlined text-[22px]">medication</span>
+                                        </div>
+                                        <div>
+                                            <p className="text-[14px] font-black text-text-main leading-tight">{batch.name}</p>
+                                            <div className="flex items-center gap-2 mt-1">
+                                                <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest">ID:</span>
+                                                <code className="text-[10px] font-black font-mono text-primary bg-primary/5 px-1.5 py-0.5 rounded tracking-tighter">{batch.id}</code>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </td>
-                                <td className="px-6 py-4">
-                                    <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider ${batch.status === 'Active' ? 'bg-green-100 text-green-700' : batch.status === 'Recalled' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700'}`}>
+                                <td className="px-6 py-5">
+                                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${batch.status === 'Active' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
+                                            batch.status === 'Recalled' ? 'bg-red-50 text-red-600 border-red-100' :
+                                                'bg-amber-50 text-amber-600 border-amber-100'
+                                        }`}>
+                                        <span className={`size-1.5 rounded-full ${batch.status === 'Active' ? 'bg-emerald-500' : batch.status === 'Recalled' ? 'bg-red-500' : 'bg-amber-500 animate-pulse'}`}></span>
                                         {batch.status}
                                     </span>
                                 </td>
-                                <td className="px-6 py-4 text-text-muted">{batch.expiry}</td>
-                                <td className="px-6 py-4 text-text-muted font-medium">{batch.storage}</td>
-                                <td className="px-6 py-4 text-right">
-                                    {batch.status === 'Recalled' ? (
-                                        <button className="text-[11px] font-bold text-text-muted uppercase tracking-tight border border-slate-200 px-3 py-1.5 rounded-lg hover:bg-slate-50 transition-all">View Report</button>
-                                    ) : batch.status === 'Expired' ? (
-                                        <button className="text-[11px] font-bold text-slate-300 cursor-not-allowed uppercase tracking-tight" disabled>Archived</button>
-                                    ) : (
-                                        <button className="text-[11px] font-bold text-red-600 hover:text-red-700 transition-all uppercase tracking-tight hover:bg-red-50 px-3 py-1.5 rounded-lg border border-transparent hover:border-red-100">Recall Batch</button>
-                                    )}
+                                <td className="px-6 py-5">
+                                    <p className="text-[11px] font-black text-text-main">{batch.mfd}</p>
+                                    <p className="text-[10px] font-bold text-text-muted mt-0.5 uppercase tracking-tighter">Exp: {batch.expiry}</p>
+                                </td>
+                                <td className="px-6 py-5">
+                                    <div className="flex flex-col items-center gap-1">
+                                        <div className="flex items-center gap-2">
+                                            <span className="material-symbols-outlined text-sm text-text-muted">tab_unselected</span>
+                                            <span className="text-[12px] font-black text-text-main">{batch.scans} Scans</span>
+                                        </div>
+                                        {batch.alerts > 0 && (
+                                            <div className="flex items-center gap-1 text-red-500 text-[9px] font-black uppercase tracking-widest">
+                                                <span className="material-symbols-outlined text-[12px]">warning</span>
+                                                {batch.alerts} Anomalies
+                                            </div>
+                                        )}
+                                    </div>
+                                </td>
+                                <td className="px-6 py-5 text-right">
+                                    <div className="flex items-center justify-end gap-2">
+                                        <button className="size-9 rounded-xl bg-white border border-slate-200 text-slate-400 hover:text-primary hover:border-primary transition-all flex items-center justify-center shadow-sm" title="Download QR Code">
+                                            <span className="material-symbols-outlined text-[20px]">qr_code_2</span>
+                                        </button>
+                                        <button className="size-9 rounded-xl bg-white border border-slate-200 text-slate-400 hover:text-primary hover:border-primary transition-all flex items-center justify-center shadow-sm" title="Transfer Ownership">
+                                            <span className="material-symbols-outlined text-[20px]">local_shipping</span>
+                                        </button>
+                                        {batch.status === 'Active' && (
+                                            <button
+                                                onClick={() => handleRecall(batch.id)}
+                                                className="size-9 rounded-xl bg-white border border-slate-200 text-slate-400 hover:text-red-500 hover:border-red-100 transition-all flex items-center justify-center shadow-sm"
+                                                title="Recall Batch"
+                                            >
+                                                <span className="material-symbols-outlined text-[20px]">running_with_errors</span>
+                                            </button>
+                                        )}
+                                        <button className="size-9 rounded-xl bg-slate-900 text-white hover:scale-105 active:scale-95 transition-all flex items-center justify-center shadow-lg" title="View Ledger Transaction">
+                                            <span className="material-symbols-outlined text-[20px]">link</span>
+                                        </button>
+                                    </div>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-            </div>
-            <div className="p-6 border-t border-slate-100 bg-slate-50/30 flex items-center justify-between">
-                <p className="text-xs text-text-muted font-medium">Showing <span className="text-text-main">4</span> of <span className="text-text-main">1,284</span> production batches</p>
-                <div className="flex gap-2">
-                    <button className="px-4 py-2 rounded-lg border border-slate-200 bg-white text-xs font-bold text-text-muted hover:bg-slate-50 hover:text-text-main transition-all">Previous</button>
-                    <button className="px-4 py-2 rounded-lg border border-slate-200 bg-white text-xs font-bold text-text-muted hover:bg-slate-50 hover:text-text-main transition-all">Next</button>
-                </div>
             </div>
         </div>
     );

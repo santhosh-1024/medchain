@@ -17,6 +17,27 @@ export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
 
     const login = (email, password) => {
+        // demo/mock login logic for immediate testing
+        if (email === 'admin@medchain.com' && password === 'password123') {
+            setCurrentUser({ uid: 'demo-admin', email });
+            setUserRole('admin');
+            setLoading(false);
+            return Promise.resolve();
+        }
+        if (email === 'manufacturer@pharma.com' && password === 'password123') {
+            setCurrentUser({ uid: 'demo-manufacturer', email });
+            setUserRole('manufacturer');
+            setLoading(false);
+            return Promise.resolve();
+        }
+        if (email === 'user@medchain.com' && password === 'password123') {
+            setCurrentUser({ uid: 'demo-user', email });
+            setUserRole('user');
+            setLoading(false);
+            return Promise.resolve();
+        }
+
+        // Fallback to real Firebase if not using demo credentials
         return signInWithEmailAndPassword(auth, email, password);
     };
 

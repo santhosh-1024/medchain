@@ -8,6 +8,9 @@ import ScanHistorySafetyAlerts from './pages/ScanHistorySafetyAlerts';
 import AISuspiciousActivity from './pages/AISuspiciousActivity';
 import RecalledProductAlert from './pages/RecalledProductAlert';
 import CounterfeitAlertResult from './pages/CounterfeitAlertResult';
+import AuditLogs from './pages/Admin/AuditLogs';
+import AdminSettings from './pages/Admin/AdminSettings';
+import UserPortal from './pages/UserPortal';
 import Login from './pages/Login';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -22,9 +25,9 @@ function App() {
 
           {/* Protected Routes inside Layout */}
           <Route path="/" element={<Layout />}>
-            <Route index element={<Navigate to="/manufacturer" replace />} />
+            <Route index element={<Navigate to="/login" replace />} />
 
-            {/* Manufacturer Context */}
+            {/* 🏭 Manufacturer Portal */}
             <Route
               path="manufacturer"
               element={
@@ -42,7 +45,7 @@ function App() {
               }
             />
 
-            {/* Admin Context */}
+            {/* 🔐 Admin Portal */}
             <Route
               path="user-management"
               element={
@@ -59,12 +62,36 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="admin/audit-logs"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AuditLogs />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="admin/settings"
+              element={
+                <ProtectedRoute allowedRoles={['admin']}>
+                  <AdminSettings />
+                </ProtectedRoute>
+              }
+            />
 
-            {/* General Context */}
+            {/* 🏥 User Portal */}
+            <Route
+              path="user/portal"
+              element={
+                <ProtectedRoute allowedRoles={['user', 'admin']}>
+                  <UserPortal />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="scan-history"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute allowedRoles={['user', 'admin']}>
                   <ScanHistorySafetyAlerts />
                 </ProtectedRoute>
               }

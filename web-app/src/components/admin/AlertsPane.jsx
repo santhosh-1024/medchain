@@ -6,44 +6,45 @@ const AlertsPane = () => {
             risk: 'CRITICAL',
             riskColor: 'bg-red-50 text-red-600 border-red-100',
             time: 'Just now',
-            title: 'Anomalous Scan Pattern Detected',
-            subtitle: 'Multiple validation attempts observed from geographic clusters NYC & LON within 4 minutes.',
+            title: 'Multiple Geolocation Scans',
+            subtitle: 'Batch ID #8821-XQ detected in NYC and LON within a 4-minute window. Potential counterfeit cloning.',
             details: [
-                { label: 'Network Entity', value: '8821-XQ' },
+                { label: 'Network Entity', value: 'BATCH-8821-XQ' },
                 { label: 'Primary Cluster', value: 'NYC-CENTRAL' },
-                { label: 'Time Delta', value: '4.2 min' }
+                { label: 'Secondary Cluster', value: 'LON-NORTH' }
             ],
             actions: [
-                { label: 'Investigate Node', type: 'primary' },
-                { label: 'Flag Entry', type: 'secondary' }
+                { label: 'Freeze Batch', type: 'primary' },
+                { label: 'Dispatch Alert', type: 'secondary' }
             ]
         },
         {
             risk: 'ADVISORY',
             riskColor: 'bg-amber-50 text-amber-600 border-amber-100',
             time: '12m ago',
-            title: 'High Latency Deviation',
-            subtitle: 'Distribution ledger requests for node EU-WEST-2 are exceeding baseline by 450%.',
+            title: 'Irregular Transfer Pattern',
+            subtitle: 'Unexpected ownership transfer bypasses authorized distributor nodes. Potential bypass attempt.',
             details: [
-                { label: 'System Load', value: '1.2k req/sec' },
-                { label: 'Peak Variance', value: '+450%' }
+                { label: 'Source Node', value: 'MAN-PHARMA-01' },
+                { label: 'Dest Node', value: 'RETAIL-UNKWN-04' }
             ],
             actions: [
-                { label: 'Analyze Traffic', type: 'primary' },
-                { label: 'Acknowledge', type: 'secondary' }
+                { label: 'Verify Custody', type: 'primary' },
+                { label: 'Hold Transfer', type: 'secondary' }
             ]
         },
         {
-            risk: 'VERIFIED',
+            risk: 'SECURITY',
             riskColor: 'bg-slate-50 text-slate-400 border-slate-100',
             time: '45m ago',
-            title: 'Blocked Access Violation',
-            subtitle: 'Automated defense protocols suspended access for unassigned node origin.',
+            title: 'Duplicate Batch Registry',
+            subtitle: 'Attempt to register a batch ID that already exists on the Polygon mainnet ledger.',
             details: [
-                { label: 'Access Point', value: '192.168.1.42' }
+                { label: 'Attempt ID', value: 'BATCH-4492-ZA' },
+                { label: 'Origin Point', value: '192.168.1.42' }
             ],
             actions: [
-                { label: 'Resolved', type: 'disabled' }
+                { label: 'Blocked', type: 'disabled' }
             ]
         }
     ];
@@ -53,14 +54,14 @@ const AlertsPane = () => {
             <div className="flex items-center justify-between mb-2">
                 <h3 className="text-text-main font-black text-[11px] uppercase tracking-[0.2em] flex items-center gap-2">
                     <span className="material-symbols-outlined text-red-500 text-[20px] animate-pulse">monitoring</span>
-                    Network Anomalies
+                    AI Suspicious Activity
                 </h3>
-                <span className="text-[10px] font-black text-text-muted uppercase tracking-widest bg-slate-50 px-2 py-1 rounded border border-slate-100">Live Stream</span>
+                <span className="text-[10px] font-black text-text-muted uppercase tracking-widest bg-slate-50 px-2 py-1 rounded border border-slate-100">Intelligent Monitoring</span>
             </div>
 
             <div className="space-y-4">
                 {alerts.map((alert, index) => (
-                    <div key={index} className="medical-card p-6 border-l-[6px] border-l-primary/10 hover:border-l-primary transition-all bg-white relative overflow-hidden">
+                    <div key={index} className="medical-card p-6 border-l-[6px] border-l-primary/10 hover:border-l-primary transition-all bg-white relative overflow-hidden border-none shadow-medical">
                         <div className="flex justify-between items-start mb-4">
                             <span className={`text-[9px] font-black px-2.5 py-1 rounded-full uppercase tracking-widest border shadow-sm ${alert.riskColor}`}>{alert.risk}</span>
                             <span className="text-[10px] text-text-muted font-bold tracking-tight">{alert.time}</span>

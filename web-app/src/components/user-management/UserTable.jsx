@@ -1,129 +1,145 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const UserTable = () => {
-    const users = [
-        { name: 'BioGen Global Lab', wallet: '0x71C...4e21', role: 'Manufacturer', roleColor: 'bg-blue-50 text-blue-700 border-blue-100', status: 'Active', statusColor: 'bg-emerald-500', lastActivity: '2 mins ago', activityType: 'Inventory Update' },
-        { name: 'SwiftLogix Distro', wallet: '0xA3B...F891', role: 'Distributor', roleColor: 'bg-amber-50 text-amber-700 border-amber-100', status: 'Active', statusColor: 'bg-emerald-500', lastActivity: '14 hours ago', activityType: 'Batch Transit Start' },
-        { name: 'City Central Health', wallet: '0x9D2...77C0', role: 'Pharmacy', roleColor: 'bg-purple-50 text-purple-700 border-purple-100', status: 'Suspended', statusColor: 'bg-slate-300', lastActivity: '3 days ago', activityType: 'Login Attempt', actionRequired: true },
-        { name: 'Apex Pharma Retail', wallet: '0x5E8...2A11', role: 'Pharmacy', roleColor: 'bg-purple-50 text-purple-700 border-purple-100', status: 'Active', statusColor: 'bg-emerald-500', lastActivity: 'Just now', activityType: 'Signature Applied' },
-    ];
+    const [users, setUsers] = useState([
+        {
+            id: 1,
+            name: 'BioGen Global Lab',
+            wallet: '0x71C...4e21',
+            role: 'Manufacturer',
+            kyc: 'Verified',
+            status: 'Active',
+            lastActivity: '2 mins ago',
+            activityType: 'Inventory Update',
+            isPending: false
+        },
+        {
+            id: 2,
+            name: 'SwiftLogix Distro',
+            wallet: '0xA3B...F891',
+            role: 'Distributor',
+            kyc: 'Verified',
+            status: 'Active',
+            lastActivity: '14 hours ago',
+            activityType: 'Batch Transit Start',
+            isPending: false
+        },
+        {
+            id: 3,
+            name: 'City Central Health',
+            wallet: '0x9D2...77C0',
+            role: 'Pharmacy',
+            kyc: 'Rejected',
+            status: 'Suspended',
+            lastActivity: '3 days ago',
+            activityType: 'Login Attempt',
+            isPending: false
+        },
+        {
+            id: 4,
+            name: 'MedSource Inc.',
+            wallet: '0xBD2...88A1',
+            role: 'Manufacturer',
+            kyc: 'Pending',
+            status: 'Pending Approval',
+            lastActivity: 'Just now',
+            activityType: 'Registration Request',
+            isPending: true
+        },
+    ]);
+
+    const handleApprove = (id) => {
+        setUsers(users.map(u => u.id === id ? { ...u, isPending: false, status: 'Active', kyc: 'Verified' } : u));
+    };
+
+    const handleReject = (id) => {
+        setUsers(users.map(u => u.id === id ? { ...u, isPending: false, status: 'Suspended', kyc: 'Rejected' } : u));
+    };
 
     return (
-        <div className="medical-card p-0 overflow-hidden flex flex-col bg-white">
-            <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-white">
-                <div>
-                    <h3 className="font-bold text-lg text-text-main">System Participants</h3>
-                    <p className="text-xs text-text-muted">Verified medical entities and their network activity</p>
-                </div>
-                <div className="flex gap-2">
-                    <button className="btn-secondary px-4 py-2 text-xs flex items-center gap-2">
-                        <span className="material-symbols-outlined text-sm">person_add</span>
-                        Invite Entity
-                    </button>
-                </div>
-            </div>
-
+        <div className="medical-card p-0 overflow-hidden flex flex-col bg-white border-none shadow-none">
             <div className="overflow-x-auto flex-1">
                 <table className="w-full text-left border-collapse">
                     <thead>
-                        <tr className="bg-slate-50/50 border-b border-slate-100 text-[12px] font-bold text-text-muted uppercase tracking-widest">
-                            <th className="px-6 py-4">Participant Identity</th>
-                            <th className="px-6 py-4">Authorized Role</th>
-                            <th className="px-6 py-4">Security</th>
-                            <th className="px-6 py-4">Last Event</th>
-                            <th className="px-6 py-4">Ledger Status</th>
-                            <th className="px-6 py-4 text-right">Operations</th>
+                        <tr className="bg-slate-50/50 border-b border-slate-100 text-[11px] font-bold text-text-muted uppercase tracking-[0.2em]">
+                            <th className="px-6 py-5">Participant & Wallet</th>
+                            <th className="px-6 py-5">Role</th>
+                            <th className="px-6 py-5 text-center">KYC Status</th>
+                            <th className="px-6 py-5 text-center">Network Status</th>
+                            <th className="px-6 py-5 text-right">Governance Actions</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-slate-100 text-sm">
-                        {users.map((user, index) => (
-                            <tr key={index} className="hover:bg-slate-50/50 transition-colors group">
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center gap-3">
-                                        <div className="size-11 rounded-full bg-slate-100 border border-slate-200 flex items-center justify-center overflow-hidden bg-white shadow-sm">
-                                            <span className="material-symbols-outlined text-slate-400">domain</span>
+                        {users.map((user) => (
+                            <tr key={user.id} className="hover:bg-slate-50/50 transition-colors group">
+                                <td className="px-6 py-5">
+                                    <div className="flex items-center gap-4">
+                                        <div className={`size-10 rounded-xl flex items-center justify-center border-2 ${user.isPending ? 'bg-amber-50 border-amber-100 text-amber-500' : 'bg-slate-50 border-slate-100 text-slate-400'} group-hover:scale-110 transition-transform`}>
+                                            <span className="material-symbols-outlined text-[20px]">
+                                                {user.role === 'Manufacturer' ? 'factory' : user.role === 'Distributor' ? 'local_shipping' : 'medication'}
+                                            </span>
                                         </div>
                                         <div>
-                                            <p className="text-[14px] font-bold text-text-main">{user.name}</p>
-                                            <div className="flex items-center gap-1.5 mt-0.5">
-                                                <code className="text-[11px] font-mono text-text-muted bg-slate-50 px-1.5 py-0.5 rounded border border-slate-100">{user.wallet}</code>
-                                                <button className="text-slate-300 hover:text-primary transition-colors">
-                                                    <span className="material-symbols-outlined text-[15px]">content_copy</span>
-                                                </button>
+                                            <p className="text-[14px] font-black text-text-main leading-tight">{user.name}</p>
+                                            <div className="flex items-center gap-1.5 mt-1 opacity-60 group-hover:opacity-100 transition-opacity">
+                                                <code className="text-[10px] font-black font-mono text-text-muted bg-slate-100 px-1.5 py-0.5 rounded tracking-tighter">{user.wallet}</code>
+                                                <span className="material-symbols-outlined text-[12px] cursor-pointer hover:text-primary">content_copy</span>
                                             </div>
                                         </div>
                                     </div>
                                 </td>
-                                <td className="px-6 py-4">
-                                    <span className={`inline-flex items-center px-3 py-1 rounded-full text-[11px] font-bold border ${user.roleColor.replace('bg-blue-50', 'bg-blue-50/50').replace('bg-amber-50', 'bg-amber-50/50').replace('bg-purple-50', 'bg-purple-50/50')}`}>
-                                        <span className="material-symbols-outlined text-[14px] mr-1.5">
-                                            {user.role === 'Manufacturer' ? 'factory' : user.role === 'Distributor' ? 'local_shipping' : 'medication'}
-                                        </span>
-                                        {user.role}
+                                <td className="px-6 py-5 text-[11px] font-black text-text-muted uppercase tracking-widest">
+                                    {user.role}
+                                </td>
+                                <td className="px-6 py-5 text-center">
+                                    <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border ${user.kyc === 'Verified' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
+                                            user.kyc === 'Rejected' ? 'bg-red-50 text-red-600 border-red-100' :
+                                                'bg-amber-50 text-amber-600 border-amber-100'
+                                        }`}>
+                                        <span className={`size-1.5 rounded-full ${user.kyc === 'Verified' ? 'bg-emerald-500' : user.kyc === 'Rejected' ? 'bg-red-500' : 'bg-amber-500 animate-pulse'}`}></span>
+                                        {user.kyc}
                                     </span>
                                 </td>
-                                <td className="px-6 py-4">
-                                    <div className="flex items-center gap-2">
-                                        <div className={`size-2.5 rounded-full ${user.status === 'Active' ? 'bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)] animate-pulse' : 'bg-slate-300'}`}></div>
-                                        <span className={`text-xs font-semibold ${user.status === 'Suspended' ? 'text-slate-400 italic' : 'text-text-main'}`}>{user.status}</span>
-                                    </div>
+                                <td className="px-6 py-5 text-center">
+                                    <span className={`text-[11px] font-black ${user.status === 'Active' ? 'text-primary' :
+                                            user.status === 'Suspended' ? 'text-slate-300' :
+                                                'text-amber-500'
+                                        } uppercase tracking-widest`}>
+                                        {user.status}
+                                    </span>
                                 </td>
-                                <td className="px-6 py-4">
-                                    <p className="text-xs text-text-main font-semibold tracking-tight">{user.lastActivity}</p>
-                                    <p className="text-[10px] text-text-muted uppercase font-bold tracking-tighter mt-0.5">{user.activityType}</p>
-                                </td>
-                                <td className="px-6 py-4">
-                                    {user.actionRequired ? (
-                                        <div className="flex items-center gap-1.5 text-amber-600">
-                                            <span className="material-symbols-outlined text-lg">error</span>
-                                            <span className="text-[10px] font-bold uppercase tracking-tight">Audit Required</span>
+                                <td className="px-6 py-5 text-right">
+                                    {user.isPending ? (
+                                        <div className="flex items-center justify-end gap-2">
+                                            <button
+                                                onClick={() => handleReject(user.id)}
+                                                className="size-9 rounded-xl bg-red-50 text-red-500 hover:bg-red-500 hover:text-white transition-all flex items-center justify-center border border-red-100"
+                                                title="Reject Application"
+                                            >
+                                                <span className="material-symbols-outlined text-[20px]">close</span>
+                                            </button>
+                                            <button
+                                                onClick={() => handleApprove(user.id)}
+                                                className="h-9 px-4 rounded-xl bg-emerald-500 text-white font-black text-[10px] uppercase tracking-widest hover:scale-105 active:scale-95 transition-all shadow-lg shadow-emerald-500/20"
+                                            >
+                                                Approve
+                                            </button>
                                         </div>
                                     ) : (
-                                        <div className="flex items-center gap-1.5 text-primary">
-                                            <span className="material-symbols-outlined text-lg font-bold">verified_user</span>
-                                            <span className="text-[10px] font-bold uppercase tracking-tight">Verified</span>
+                                        <div className="flex items-center justify-end gap-2">
+                                            <button className="size-9 rounded-xl bg-slate-50 text-text-muted hover:text-primary hover:bg-white hover:shadow-md transition-all flex items-center justify-center border border-slate-100">
+                                                <span className="material-symbols-outlined text-[20px]">manage_accounts</span>
+                                            </button>
+                                            <button className="size-9 rounded-xl bg-slate-50 text-text-muted hover:text-red-500 hover:bg-red-50 transition-all flex items-center justify-center border border-slate-100">
+                                                <span className="material-symbols-outlined text-[20px]">block</span>
+                                            </button>
                                         </div>
                                     )}
-                                </td>
-                                <td className="px-6 py-4 text-right">
-                                    <div className="flex items-center justify-end gap-2">
-                                        <button className="p-2.5 hover:bg-white hover:shadow-md rounded-xl text-slate-400 hover:text-text-main transition-all border border-transparent hover:border-slate-100">
-                                            <span className="material-symbols-outlined text-[20px]">tune</span>
-                                        </button>
-                                        {user.actionRequired ? (
-                                            <button className="btn-primary py-1.5 text-[11px] px-4">
-                                                Grant Access
-                                            </button>
-                                        ) : (
-                                            <button className="btn-secondary py-1.5 text-[11px] px-4 font-bold border border-slate-200">
-                                                Manage
-                                            </button>
-                                        )}
-                                    </div>
                                 </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
-            </div>
-
-            <div className="px-6 py-4 bg-slate-50/50 border-t border-slate-100 flex items-center justify-between">
-                <p className="text-xs font-semibold text-text-muted">Particpants Record: <span className="text-text-main">1-4</span> of <span className="text-text-main">142</span> entities identified</p>
-                <div className="flex items-center gap-3">
-                    <button className="p-1.5 rounded-lg border border-slate-200 bg-white text-slate-400 hover:text-text-main transition-all disabled:opacity-30" disabled>
-                        <span className="material-symbols-outlined text-xl leading-none">keyboard_arrow_left</span>
-                    </button>
-                    <div className="flex items-center gap-1.5">
-                        <button className="size-8 rounded-lg bg-primary text-white text-[11px] font-bold flex items-center justify-center shadow-md shadow-primary/20">1</button>
-                        <button className="size-8 rounded-lg bg-white border border-slate-200 text-text-muted text-[11px] font-bold flex items-center justify-center hover:bg-slate-50 transition-colors">2</button>
-                        <button className="size-8 rounded-lg bg-white border border-slate-200 text-text-muted text-[11px] font-bold flex items-center justify-center hover:bg-slate-50 transition-colors">3</button>
-                        <span className="text-slate-300 mx-1">...</span>
-                        <button className="size-8 rounded-lg bg-white border border-slate-200 text-text-muted text-[11px] font-bold flex items-center justify-center hover:bg-slate-50 transition-colors">12</button>
-                    </div>
-                    <button className="p-1.5 rounded-lg border border-slate-200 bg-white text-text-muted hover:text-text-main transition-all shadow-sm">
-                        <span className="material-symbols-outlined text-xl leading-none">keyboard_arrow_right</span>
-                    </button>
-                </div>
             </div>
         </div>
     );

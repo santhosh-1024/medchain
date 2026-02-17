@@ -4,71 +4,106 @@ const ScanDetailView = ({ scan }) => {
     if (!scan) return null;
 
     return (
-        <div className="medical-card p-0 overflow-hidden flex flex-col bg-white h-full">
-            <div className="p-8 border-b border-slate-100 flex justify-between items-start bg-white">
-                <div className="flex gap-5">
-                    <div className="size-16 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/20 shadow-sm shadow-primary/5 scale-110">
-                        <span className="material-symbols-outlined text-[32px]">{scan.icon}</span>
+        <div className="medical-card p-0 overflow-hidden flex flex-col bg-white border-none shadow-medical">
+            <div className="p-8 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start bg-white gap-6">
+                <div className="flex gap-6">
+                    <div className="size-20 bg-primary/10 rounded-2xl flex items-center justify-center text-primary border border-primary/20 shadow-sm shadow-primary/5 scale-105 shrink-0">
+                        <span className="material-symbols-outlined text-[40px]">{scan.icon}</span>
                     </div>
                     <div>
-                        <h3 className="text-2xl font-black text-text-main tracking-tight">{scan.name}</h3>
-                        <div className="flex items-center gap-3 mt-1.5">
-                            <code className="text-[11px] font-mono font-bold text-primary bg-primary/5 px-2 py-0.5 rounded border border-primary/10">BATCH #{scan.batchId}</code>
-                            <div className="flex items-center gap-2 text-[11px] font-bold text-text-muted uppercase tracking-wider">
-                                <span className="material-symbols-outlined text-sm">schedule</span>
-                                {scan.fullDate}
+                        <div className="flex items-center gap-2 mb-2">
+                            <span className={`px-2.5 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${scan.status === 'Genuine' ? 'bg-emerald-50 text-emerald-600 border-emerald-100' :
+                                    scan.status === 'Counterfeit' ? 'bg-red-50 text-red-600 border-red-100' :
+                                        'bg-amber-50 text-amber-600 border-amber-100'
+                                }`}>
+                                {scan.status} UNIT
+                            </span>
+                            <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest bg-slate-100 px-2 py-1 rounded-lg">VERIFICATION #{scan.id}</span>
+                        </div>
+                        <h3 className="text-3xl font-black text-text-main tracking-tighter leading-none">{scan.name}</h3>
+                        <div className="flex items-center gap-4 mt-4">
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-text-muted font-black uppercase tracking-widest mb-1">Batch Code</span>
+                                <code className="text-[12px] font-mono font-black text-primary bg-primary/5 px-2.5 py-1 rounded border border-primary/10 tracking-tighter">{scan.batchId}</code>
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-text-muted font-black uppercase tracking-widest mb-1">Mfd Date</span>
+                                <span className="text-[13px] font-bold text-text-main">{scan.mfd}</span>
+                            </div>
+                            <div className="flex flex-col">
+                                <span className="text-[10px] text-text-muted font-black uppercase tracking-widest mb-1">Exp Date</span>
+                                <span className="text-[13px] font-bold text-text-main">{scan.expiry}</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col items-end gap-2">
-                    <span className={`px-4 py-1.5 rounded-full text-[11px] font-black uppercase tracking-[0.1em] border shadow-sm ${scan.status === 'Safe' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-amber-50 text-amber-700 border-amber-200'}`}>
-                        {scan.status} IDENTIFIED
-                    </span>
-                    <div className="flex items-center gap-1 text-[10px] text-text-muted font-bold">
-                        <span className="material-symbols-outlined text-xs">location_on</span>
-                        {scan.location}
+                <div className="flex flex-col items-end gap-3 w-full md:w-auto">
+                    <div className="text-right">
+                        <p className="text-[11px] font-black text-text-main uppercase tracking-widest">{scan.fullDate}</p>
+                        <p className="text-[10px] text-text-muted font-bold flex items-center justify-end gap-1 mt-1">
+                            <span className="material-symbols-outlined text-xs">location_on</span>
+                            {scan.location}
+                        </p>
                     </div>
+                    <button className="btn-primary w-full md:w-auto py-3 px-8 text-[11px] font-black tracking-widest shadow-xl shadow-primary/20 uppercase">Download Audit PDF</button>
                 </div>
             </div>
 
-            <div className="p-8 space-y-8 flex-1 overflow-y-auto bg-slate-50/30">
+            <div className="p-10 space-y-10 flex-1 bg-slate-50/20">
                 <div>
-                    <p className="text-[11px] font-black text-text-muted uppercase tracking-[0.15em] mb-8 border-b border-slate-100 pb-2">Cryptographic Custody Timeline</p>
-                    <div className="relative">
-                        <div className="absolute left-[15px] top-0 bottom-0 w-0.5 bg-slate-200/50 md:left-0 md:right-0 md:h-0.5 md:w-[90%] md:top-5 md:mx-auto"></div>
+                    <h4 className="text-[11px] font-black text-text-muted uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
+                        <span className="material-symbols-outlined text-sm">hub</span>
+                        Smart Contract Custody Sequence
+                    </h4>
 
-                        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
-                            {['Manufacturer', 'Distributor', 'Pharmacy', 'Consumer'].map((step, i) => (
-                                <div key={step} className="flex flex-row md:flex-col items-start md:items-center gap-4 text-center">
-                                    <div className={`z-10 size-10 rounded-xl flex items-center justify-center text-white ring-4 ring-white shadow-md ${i <= 3 ? 'bg-primary' : 'bg-slate-300'}`}>
-                                        <span className="material-symbols-outlined text-[18px] font-bold">
-                                            {i === 0 ? 'factory' : i === 1 ? 'local_shipping' : i === 2 ? 'medical_services' : 'person'}
-                                        </span>
-                                    </div>
-                                    <div className="text-left md:text-center pt-1 md:pt-0">
-                                        <p className="text-[13px] font-bold text-text-main">{step}</p>
-                                        <p className="text-[10px] text-text-muted font-bold uppercase tracking-tighter mt-0.5 italic">Verified Jan {2 + i * 4}</p>
-                                    </div>
+                    <div className="flex flex-col md:flex-row justify-between relative gap-10">
+                        <div className="absolute top-[22px] left-[10%] right-[10%] h-0.5 bg-slate-100 z-0 hidden md:block"></div>
+
+                        {[
+                            { label: 'Manufactured', entity: 'PharmaCorp', icon: 'factory', date: scan.mfd },
+                            { label: 'Distributed', entity: 'Logistics NV', icon: 'local_shipping', date: 'Jan 02, 2024' },
+                            { label: 'Dispensed', entity: 'Health Pharmacy', icon: 'medical_services', date: 'Jan 10, 2024' },
+                            { label: 'Verified', entity: 'You (Consumer)', icon: 'person', date: scan.date.split(' • ')[0] }
+                        ].map((step, i) => (
+                            <div key={i} className="flex flex-row md:flex-col items-center gap-4 text-center relative z-10 flex-1">
+                                <div className={`size-11 rounded-xl flex items-center justify-center text-white shadow-md border-4 border-white ${scan.status === 'Genuine' ? 'bg-emerald-500' : 'bg-slate-300'}`}>
+                                    <span className="material-symbols-outlined text-[18px] font-bold">{step.icon}</span>
                                 </div>
-                            ))}
-                        </div>
+                                <div className="text-left md:text-center pt-1 md:pt-0">
+                                    <p className="text-[13px] font-black text-text-main tracking-tight leading-none">{step.label}</p>
+                                    <p className="text-[10px] text-text-muted font-bold uppercase tracking-tighter mt-1">{step.date}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </div>
 
-                <div className="bg-white p-6 rounded-[16px] border border-slate-100 shadow-sm mt-4">
-                    <div className="flex items-center justify-between mb-4">
-                        <div className="flex items-center gap-2">
-                            <span className="material-symbols-outlined text-primary text-xl">verified_user</span>
-                            <span className="text-[11px] font-black text-text-main uppercase tracking-widest">Digital Audit Signature</span>
+                <div className="bg-white p-8 rounded-3xl border border-slate-100 shadow-sm mt-8 border-none shadow-medical">
+                    <div className="flex items-center justify-between mb-6">
+                        <div className="flex items-center gap-3">
+                            <div className="size-8 bg-slate-900 rounded-lg flex items-center justify-center text-white">
+                                <span className="material-symbols-outlined text-sm">enhanced_encryption</span>
+                            </div>
+                            <span className="text-[11px] font-black text-text-main uppercase tracking-widest">Protocol Intelligence Signature</span>
                         </div>
-                        <button className="text-primary hover:text-primary-dark text-[10px] font-black uppercase tracking-widest bg-primary/5 px-3 py-1.5 rounded-lg border border-primary/20 transition-all">VIEW EXPLORER</button>
+                        <span className="text-[10px] font-bold text-text-muted uppercase tracking-widest bg-emerald-50 text-emerald-600 px-3 py-1 rounded-full border border-emerald-100">Validated by AI</span>
                     </div>
-                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex items-center justify-between gap-4">
-                        <code className="text-[12px] text-text-muted break-all font-mono font-bold">0x71C7656EC7ab88b098defB751B7401B5f6d8976F</code>
-                        <button className="p-2 hover:bg-white rounded-lg text-slate-400 hover:text-primary transition-all shadow-sm">
-                            <span className="material-symbols-outlined text-lg">content_copy</span>
-                        </button>
+
+                    <div className="space-y-4">
+                        <div>
+                            <label className="text-[9px] font-black text-text-muted uppercase tracking-widest block mb-1.5 ml-1">Blockchain Transaction ID</label>
+                            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex items-center justify-between gap-4">
+                                <code className="text-[12px] text-text-muted break-all font-mono font-bold tracking-tighter">{scan.txHash}</code>
+                                <button className="p-2 hover:bg-white rounded-lg text-slate-300 hover:text-primary transition-all">
+                                    <span className="material-symbols-outlined text-lg">content_copy</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div className="p-4 bg-emerald-50/50 rounded-xl border border-emerald-100/50">
+                            <p className="text-[11px] text-emerald-700 font-bold leading-relaxed italic border-l-2 border-emerald-300 pl-3">
+                                This medicine has been successfully verified on the blockchain. No suspicious scan patterns or batch duplications were detected at the time of verification.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

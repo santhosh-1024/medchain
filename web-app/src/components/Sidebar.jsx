@@ -16,26 +16,34 @@ const Sidebar = () => {
         }
     };
 
-    const manufacturerLinks = [
-        { path: '/manufacturer', name: 'Manufacturing', icon: 'account_tree' },
-        { path: '/supply-chain', name: 'Supply Chain', icon: 'swap_horiz' },
-    ];
-
     const adminLinks = [
-        { path: '/ai-suspicious-activity', name: 'Network Sentry', icon: 'monitoring' },
-        { path: '/user-management', name: 'Identity Gov', icon: 'shield' },
-        { path: '/supply-chain', name: 'Global Assets', icon: 'hub' },
+        { path: '/ai-suspicious-activity', name: 'System Sentry', icon: 'monitoring' },
+        { path: '/user-management', name: 'Identity Gov', icon: 'shield_person' },
+        { path: '/admin/audit-logs', name: 'Compliance Audit', icon: 'history_edu' },
+        { path: '/admin/settings', name: 'Network Config', icon: 'settings' },
     ];
 
-    const commonLinks = [
-        { path: '/scan-history', name: 'Intelligence', icon: 'clinical_notes' },
+    const manufacturerLinks = [
+        { path: '/manufacturer', name: 'Batch Center', icon: 'factory' },
+        { path: '/supply-chain', name: 'Custodian Transfer', icon: 'local_shipping' },
+        // { path: '/manufacturer/analytics', name: 'Yield Analytics', icon: 'analytics' },
     ];
 
-    const links = userRole === 'manufacturer'
-        ? [...manufacturerLinks, ...commonLinks]
-        : userRole === 'admin'
-            ? [...adminLinks, ...commonLinks]
-            : commonLinks;
+    const userLinks = [
+        { path: '/user/portal', name: 'Safety Hub', icon: 'health_and_safety' },
+        { path: '/scan-history', name: 'My History', icon: 'manage_search' },
+    ];
+
+    const getLinks = () => {
+        switch (userRole) {
+            case 'admin': return adminLinks;
+            case 'manufacturer': return manufacturerLinks;
+            case 'user': return userLinks;
+            default: return userLinks;
+        }
+    };
+
+    const links = getLinks();
 
     return (
         <aside className="w-64 h-screen fixed left-0 top-0 z-40 flex flex-col bg-white border-r border-slate-100 shadow-sm">
@@ -51,7 +59,7 @@ const Sidebar = () => {
 
             <nav className="flex-1 px-4 space-y-1.5 mt-4 overflow-y-auto custom-scrollbar">
                 <div className="px-4 mb-2">
-                    <p className="text-[10px] font-black text-text-muted uppercase tracking-[0.2em]">Sectors</p>
+                    <p className="text-[10px] font-black text-text-muted uppercase tracking-[0.2em]">{userRole} Portal</p>
                 </div>
                 {links.map((link) => {
                     const isActive = location.pathname === link.path;
@@ -83,7 +91,7 @@ const Sidebar = () => {
                         </div>
                         <div className="overflow-hidden">
                             <p className="text-[12px] font-black text-text-main leading-tight truncate">Dr. S. Rivera</p>
-                            <p className="text-[10px] text-text-muted uppercase tracking-widest font-black mt-0.5">{userRole || 'Unauthorized'}</p>
+                            <p className="text-[10px] text-text-muted uppercase tracking-widest font-black mt-0.5 truncate">{userRole || 'Unauthorized'}</p>
                         </div>
                     </div>
                 </div>

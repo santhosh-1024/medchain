@@ -3,9 +3,9 @@ import React from 'react';
 const StatsBar = () => {
     return (
         <section className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="medical-card p-6 flex flex-col justify-between group hover:border-red-100 transition-all hover:shadow-lg">
+            <div className="medical-card p-6 flex flex-col justify-between group hover:border-red-100 transition-all hover:shadow-lg bg-white border-none shadow-medical">
                 <div className="flex justify-between items-start">
-                    <p className="text-text-muted text-[11px] font-black uppercase tracking-[0.1em]">Critical Alerts</p>
+                    <p className="text-text-muted text-[11px] font-black uppercase tracking-[0.1em]">Counterfeit Alerts</p>
                     <div className="bg-red-50 p-2 rounded-xl border border-red-100 shadow-sm">
                         <span className="material-symbols-outlined text-red-600 text-xl font-bold">security</span>
                     </div>
@@ -19,45 +19,45 @@ const StatsBar = () => {
                 </div>
             </div>
 
-            <div className="medical-card p-6 flex flex-col justify-between group hover:border-green-100 transition-all hover:shadow-lg">
+            <div className="medical-card p-6 flex flex-col justify-between group hover:border-amber-100 transition-all hover:shadow-lg bg-white border-none shadow-medical">
                 <div className="flex justify-between items-start">
-                    <p className="text-text-muted text-[11px] font-black uppercase tracking-[0.1em]">Network Pulse</p>
-                    <div className="bg-green-50 p-2 rounded-xl border border-green-100 shadow-sm">
-                        <span className="material-symbols-outlined text-green-600 text-xl font-bold">health_and_safety</span>
+                    <p className="text-text-muted text-[11px] font-black uppercase tracking-[0.1em]">Active Recalls</p>
+                    <div className="bg-amber-50 p-2 rounded-xl border border-amber-100 shadow-sm">
+                        <span className="material-symbols-outlined text-amber-600 text-xl font-bold">running_with_errors</span>
                     </div>
                 </div>
                 <div className="flex items-baseline gap-3 mt-4">
-                    <span className="text-4xl font-black text-green-600 tracking-tighter">98.4%</span>
-                    <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest">-0.1% GAP</p>
+                    <span className="text-4xl font-black text-amber-600 tracking-tighter">3</span>
+                    <p className="text-[10px] font-bold text-text-muted uppercase tracking-widest">+1 PENDING</p>
                 </div>
             </div>
 
-            <div className="medical-card p-6 flex flex-col justify-between group hover:border-primary/20 transition-all hover:shadow-lg">
+            <div className="medical-card p-6 flex flex-col justify-between group hover:border-primary/20 transition-all hover:shadow-lg bg-white border-none shadow-medical">
                 <div className="flex justify-between items-start">
-                    <p className="text-text-muted text-[11px] font-black uppercase tracking-[0.1em]">Ledger Nodes</p>
+                    <p className="text-text-muted text-[11px] font-black uppercase tracking-[0.1em]">Total Batches</p>
                     <div className="bg-primary/5 p-2 rounded-xl border border-primary/20 shadow-sm">
-                        <span className="material-symbols-outlined text-primary text-xl font-bold">hub</span>
+                        <span className="material-symbols-outlined text-primary text-xl font-bold">inventory_2</span>
                     </div>
                 </div>
                 <div className="flex items-baseline gap-3 mt-4">
-                    <span className="text-4xl font-black text-text-main tracking-tighter">1,402</span>
+                    <span className="text-4xl font-black text-text-main tracking-tighter">1,284</span>
                     <span className="text-[10px] font-black text-primary px-2.5 py-1 bg-primary/10 rounded-full border border-primary/20">
-                        +15% WEEKLY
+                        GLOBALLY
                     </span>
                 </div>
             </div>
 
-            <div className="medical-card p-6 flex flex-col justify-between group hover:border-primary/20 transition-all hover:shadow-lg">
+            <div className="medical-card p-6 flex flex-col justify-between group hover:border-emerald-100 transition-all hover:shadow-lg bg-white border-none shadow-medical">
                 <div className="flex justify-between items-start">
-                    <p className="text-text-muted text-[11px] font-black uppercase tracking-[0.1em]">Latent Speed</p>
-                    <div className="bg-primary/5 p-2 rounded-xl border border-primary/20 shadow-sm">
-                        <span className="material-symbols-outlined text-primary text-xl font-bold">speed</span>
+                    <p className="text-text-muted text-[11px] font-black uppercase tracking-[0.1em]">Ledger Transfers</p>
+                    <div className="bg-emerald-50 p-2 rounded-xl border border-emerald-100 shadow-sm">
+                        <span className="material-symbols-outlined text-emerald-600 text-xl font-bold">swap_horiz</span>
                     </div>
                 </div>
                 <div className="flex items-baseline gap-3 mt-4">
-                    <span className="text-4xl font-black text-text-main tracking-tighter">24ms</span>
-                    <span className="text-[10px] font-black text-green-600 px-2.5 py-1 bg-green-50 rounded-full border border-green-100 uppercase tracking-widest">
-                        OPTIMAL
+                    <span className="text-4xl font-black text-text-main tracking-tighter">8,942</span>
+                    <span className="text-[10px] font-black text-emerald-600 px-2.5 py-1 bg-emerald-50 rounded-full border border-emerald-100 uppercase tracking-widest">
+                        SYNCED
                     </span>
                 </div>
             </div>
